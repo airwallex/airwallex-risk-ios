@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "E1E94B7F-7488-45F0-8A04-26D70BA569C9",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:",
+          "identifier" : "AirwallexRisk",
+          "name" : "AirwallexRisk"
+        }
+      ]
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "AirwallexRiskTests",
+        "name" : "AirwallexRiskTests"
+      }
+    }
+  ],
+  "version" : 1
+}
