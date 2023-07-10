@@ -14,6 +14,7 @@ enum AirwallexValue {
     static let unknown = "unknown"
     static let contentJSON = "application/json"
     static let scheme = "https"
+    static let notStartedWarning = "Please call `AirwallexRisk.start()` on app launch."
 }
 
 enum AirwallexKey {

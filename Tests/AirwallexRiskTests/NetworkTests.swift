@@ -12,6 +12,11 @@ import XCTest
 final class NetworkTests: XCTestCase {
     private let body = CodableMock(id: "id")
 
+    override func setUp() {
+        super.setUp()
+        AirwallexRisk.start()
+    }
+
     func testMapGetURLRequest() throws {
         let mockRequest = MockHTTPRequest()
         let urlRequest = try URLRequest(request: mockRequest)
@@ -66,7 +71,6 @@ final class NetworkTests: XCTestCase {
 }
 
 private struct MockHTTPRequest: HTTPRequestType {
-    let host: String = "www.airwallex.com"
     let path: String
     let method: HTTPRequestMethod
 

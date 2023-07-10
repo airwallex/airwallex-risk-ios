@@ -9,7 +9,18 @@
 import Foundation
 
 protocol HTTPRequestType {
-    var host: String { get }
     var path: String { get }
     var method: HTTPRequestMethod { get }
+}
+
+extension HTTPRequestType {
+    var host: String {
+        get throws {
+            guard let context = AirwallexRisk.shared.context else {
+                print(AirwallexValue.notStartedWarning)
+                throw HTTPRequestError.invalidURL
+            }
+            return context.environment.host
+        }
+    }
 }

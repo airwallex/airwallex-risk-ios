@@ -12,7 +12,7 @@ extension AirwallexRisk {
     /// Header to be attached to all airwallex.com requests.
     public static var header: Header? {
         guard let context = shared.context else {
-            print("Please call `AirwallexRisk.start()` first")
+            print(AirwallexValue.notStartedWarning)
             return nil
         }
         return .init(

@@ -12,7 +12,7 @@ extension URL {
     init(request: HTTPRequestType) throws {
         var components = URLComponents()
         components.scheme = AirwallexValue.scheme
-        components.host = request.host
+        components.host = try request.host
         components.path += request.path
         guard let url = components.url else {
             throw HTTPRequestError.invalidURL
