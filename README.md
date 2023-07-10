@@ -8,8 +8,8 @@ Table of contents
 <!--ts-->
    * [Requirements](#requirements)
    * [Usage](#usage)
-         * [Tracking](#tracking)
-         * [Request header](#request-header)
+     * [Tracking](#tracking)
+     * [Request header](#request-header)
    
 <!--te-->
 
