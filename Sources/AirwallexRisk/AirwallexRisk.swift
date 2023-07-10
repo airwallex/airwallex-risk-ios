@@ -10,10 +10,7 @@ import Foundation
 
 public class AirwallexRisk {
     static var shared: AirwallexRisk = .init()
-
     var context: AirwallexRiskContext?
-
-    init() { }
 
     /// Must be called once as early as possible in the app lifecycle.
     /// Optional configuration.
