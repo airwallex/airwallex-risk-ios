@@ -11,50 +11,47 @@ import UIKit
 
 struct App {
 
-    /// Obtain the app name.
+    /// App name.
     ///
     /// Example of return values
-    ///  - `"Airwallex"
+    ///  - `"Airwallex"`
     var name: String? {
         Bundle.appValue(for: .appName)
     }
 
-    /// Obtain the app version.
+    /// App version.
     ///
     /// Example of return values
-    ///  - `"2.60.0"
+    ///  - `"2.60.0"`
     var version: String? {
         Bundle.appValue(for: .version)
     }
 
-    /// Obtain the app build.
+    /// App build.
     ///
     /// Example of return values
-    ///  - `"123"
+    ///  - `"123"`
     var build: String? {
         Bundle.appValue(for: .build)
     }
 
-    /// Obtain the localised app language. This indicate the language (of text) the user is most likely seeing in the UI.
+    /// App language. This indicate the language (of text) the user is most likely seeing in the UI.
     ///
     /// Example of return values
-    ///  - `"en"
+    ///  - `"en"`
     var language: String? {
         Bundle.main.preferredLocalizations.first
     }
 
     /// Determine if the app can be refreshed in the background.
-    ///
-    /// Example of return values
-    ///  - `true`
     var isBackgroundEnabled: Bool {
         UIApplication.shared.isBackgroundEnabled
     }
 
-    /// Obtain the Airwallex Risk SDK version.
+    /// Airwallex Risk SDK version.
     ///
     /// Example of return values
-    ///  - `"1.0.0"
+    ///  - `"1.0.0"`
     var sdkVersion: String? {
         Bundle.version
     }

@@ -15,9 +15,12 @@ struct Storage<T: Codable> {
     private let defaultValue: T
     private let defaults: UserDefaults?
 
-    /// Property wrapper to store Codable objects in UserDefaults.
-    /// If no value is set, `defaultValue` will be stored to UserDefaults for subsequent usage.
+    /// Property wrapper for storing Codable objects in UserDefaults.
     ///
+    /// - Parameters:
+    ///   - key: UserDefaults storage key
+    ///   - defaultValue: Codable. If no value has been set previously, `defaultValue` will be stored for subsequent usage.
+    ///   - defaults: UserDefault instance used for storage. The default SDK instance will be used if `nil` is passed in.
     init(
         key: String,
         defaultValue: T,

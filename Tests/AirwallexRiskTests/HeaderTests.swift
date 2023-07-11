@@ -19,14 +19,14 @@ final class HeaderTests: XCTestCase {
     func testSetAirwallexHeader() throws {
         var request = URLRequest(url: URL(string: "https://www.airwallex.com")!)
         let header = try XCTUnwrap(AirwallexRisk.header)
-        XCTAssertNil(request.value(forHTTPHeaderField: header.key))
+        XCTAssertNil(request.value(forHTTPHeaderField: header.field))
         request.setAirwallexHeader()
-        XCTAssertEqual(request.value(forHTTPHeaderField: header.key), AirwallexRisk.shared.context?.device.id.uuidString)
+        XCTAssertEqual(request.value(forHTTPHeaderField: header.field), AirwallexRisk.shared.context?.device.id.uuidString)
     }
 
     func testManualHeader() throws {
         let header = try XCTUnwrap(AirwallexRisk.header)
-        XCTAssertEqual(header.key, AirwallexKey.header)
+        XCTAssertEqual(header.field, AirwallexKey.header)
         XCTAssertEqual(header.value, AirwallexRisk.shared.context?.device.id.uuidString)
     }
 }

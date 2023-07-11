@@ -11,9 +11,12 @@ public struct AirwallexRiskConfiguration {
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
 
-    /// AirwallexRisk Options
-    /// Set `isProduction` to `false` for test environments.
-    /// **Only modify** the tenant value if requested by Airwallex.
+    /// AirwallexRisk configuration options.
+    ///
+    /// Assigned when starting the SDK with ``AirwallexRisk/AirwallexRisk/start(with:)``.
+    /// - Parameters:
+    ///   - isProduction: Set to false for pre-production or test builds.
+    ///   - tenant: Do not modify unless requested by Airwallex.
     public init(
         isProduction: Bool = true,
         tenant: Tenant = .scale

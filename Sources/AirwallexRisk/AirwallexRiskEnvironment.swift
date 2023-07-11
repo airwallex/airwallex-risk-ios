@@ -13,7 +13,6 @@ enum AirwallexRiskEnvironment {
     case demo
     case staging
 
-
     var host: String {
         switch self {
         case .production:

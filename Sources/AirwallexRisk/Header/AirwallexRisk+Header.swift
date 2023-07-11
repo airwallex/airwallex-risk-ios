@@ -9,14 +9,16 @@
 import Foundation
 
 extension AirwallexRisk {
+
     /// Header to be attached to all airwallex.com requests.
+    ///
     public static var header: Header? {
         guard let context = shared.context else {
             print(AirwallexValue.notStartedWarning)
             return nil
         }
         return .init(
-            key: AirwallexKey.header,
+            field: AirwallexKey.header,
             value: context.device.id.uuidString
         )
     }

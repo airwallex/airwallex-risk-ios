@@ -12,9 +12,10 @@ public class AirwallexRisk {
     static var shared: AirwallexRisk = .init()
     private(set) var context: AirwallexRiskContext?
 
-    /// Must be called once as early as possible in the app lifecycle.
-    /// Optional configuration.
+    /// Start the `AirwallexRisk` SDK.
     ///
+    /// - Parameter configuration: ``AirwallexRiskConfiguration`` can be passed in if additional configuration is needed.
+    /// - Remark: Must be called once, as early as possible in the apps lifecycle.
     public static func start(
         with configuration: AirwallexRiskConfiguration = .init()
     ) {
@@ -26,22 +27,14 @@ public class AirwallexRisk {
             environment: configuration.environment,
             tenant: configuration.tenant
         )
-
-        print(
-        """
-        Airwallex Risk started with context:
-        App name: \(String(describing: shared.context!.app.name))
-        Environment: \(String(describing: shared.context!.environment))
-        Tenant: \(shared.context!.tenant.rawValue)
-        DeviceID: \(shared.context!.device.id)
-        SessionID: \(shared.context!.sessionID)
-        """
-        )
     }
 
-    /// Configure the Airwallex user information when available.
-    /// This will be persisted until the next function call. Send `nil` to clear.
+    /// Stores the signed in Airwallex account and user IDs.
     ///
+    /// Use this method after user sign in/out to store the user properties to be sent with events.
+    /// - Parameters:
+    ///   - accountID: Signed in Airwallex account ID. Set `nil` when signed out.
+    ///   - userID: Signed in Airwallex user ID. Set `nil` when signed out.
     public static func set(
         accountID: UUID?,
         userID: UUID?

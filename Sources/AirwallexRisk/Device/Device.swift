@@ -10,22 +10,22 @@ import Foundation
 import UIKit
 
 struct Device {
-    /// Per installation device identifier. Do not update.
+    /// Per installation device identifier. Do not modify.
     @Storage(key: AirwallexUserDefaultKey.deviceID, defaultValue: .init())
     private(set) var id: UUID
 
-    /// Obtain the devices timezone.
+    /// Device timezone.
     ///
     /// Example of return values
-    ///  - `"Australia/Melbourne"
+    ///  - `"Australia/Melbourne"`
     var timezone: String? {
         TimeZone.current.identifier
     }
 
-    /// Obtain the devices language.
+    /// Device language.
     ///
     /// Example of return values
-    ///  - `"en"
+    ///  - `"en"`
     var language: String? {
         if #available(iOS 16, *) {
             return Locale.current.language.languageCode?.identifier
@@ -34,10 +34,10 @@ struct Device {
         }
     }
 
-    /// Obtain the devices region identifier.
+    /// Device region identifier.
     ///
     /// Example of return values
-    ///  - `"US"
+    ///  - `"US"`
     var countryISO: String? {
         if #available(iOS 16, *) {
             return Locale.current.language.region?.identifier
@@ -46,23 +46,23 @@ struct Device {
         }
     }
 
-    /// Obtain the operating system name.
+    /// Device operating system name.
     ///
     /// Example of return values
-    ///  - `"iOS"
+    ///  - `"iOS"`
     var osName: String {
         UIDevice.current.systemName
     }
 
-    /// Obtain the operating system version number.
+    /// Device operating system version number.
     ///
     /// Example of return values
-    ///  - `"16.4"
+    ///  - `"16.4"`
     var osVersion: String {
         UIDevice.current.systemVersion
     }
 
-    /// Obtain the hardware model name.
+    /// Device hardware model name.
     ///
     /// Example of return values
     ///  - `"iPhone8,1"` = iPhone 6s
@@ -79,10 +79,10 @@ struct Device {
         return model.trimmingCharacters(in: .controlCharacters)
     }
 
-    /// Obtain the devices brand.
+    /// Device brand.
     ///
     /// Example of return values
-    ///  - `"Apple"
+    ///  - `"Apple"`
     var modelBrand: String {
         AirwallexValue.apple
     }

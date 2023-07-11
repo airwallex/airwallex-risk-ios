@@ -26,5 +26,17 @@ class AirwallexRiskContext {
         self.sessionID = .init()
         self.device = .init()
         self.app = .init()
+
+        print("AirwallexRisk context:\n\(description)")
+    }
+
+    var description: String {
+        """
+        App name: \(app.name ?? "unknown")
+        Environment: \(String(describing: environment))
+        Tenant: \(tenant.rawValue)
+        DeviceID: \(device.id)
+        SessionID: \(sessionID)
+        """
     }
 }

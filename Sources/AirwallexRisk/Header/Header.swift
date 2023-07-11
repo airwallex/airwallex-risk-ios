@@ -9,6 +9,6 @@
 import Foundation
 
 public struct Header {
-    public let key: String
+    public let field: String
     public let value: String
 }
