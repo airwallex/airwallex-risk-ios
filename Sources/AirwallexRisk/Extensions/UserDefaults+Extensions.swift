@@ -10,7 +10,6 @@ import Foundation
 extension UserDefaults {
     private static let airwallexRiskSuiteName = "com.airwallex.risk-sdk"
 
-
     /// AirwallexRisk UserDefault instance.
     static var sdk = UserDefaults(suiteName: airwallexRiskSuiteName)
 }

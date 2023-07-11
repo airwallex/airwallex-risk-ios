@@ -9,7 +9,6 @@
 import Foundation
 
 extension AirwallexRisk {
-
     /// Header to be attached to all airwallex.com requests.
     ///
     public static var header: Header? {
