@@ -10,7 +10,7 @@ import XCTest
 @testable import AirwallexRisk
 
 final class AirwallexRiskContextTests: XCTestCase {
-    func testOnForegroundSessionIDChanges() {
+    func testOnForegroundSessionIDDoesNotChange() {
         let context = AirwallexRiskContext(environment: .production, tenant: .scale)
         let initialSessionID = context.sessionID
         NotificationCenter.default.post(
@@ -18,7 +18,7 @@ final class AirwallexRiskContextTests: XCTestCase {
             object: self,
             userInfo: nil
         )
-        XCTAssertNotEqual(initialSessionID, context.sessionID)
+        XCTAssertEqual(initialSessionID, context.sessionID)
     }
 
     func testOnBackgroundSessionIDDoesNotChange() {

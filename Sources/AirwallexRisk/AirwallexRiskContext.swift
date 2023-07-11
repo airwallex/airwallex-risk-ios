@@ -13,7 +13,7 @@ class AirwallexRiskContext {
     var user: User
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
-    private(set) var sessionID: UUID
+    let sessionID: UUID
     let device: Device
     let app: App
 
@@ -26,11 +26,5 @@ class AirwallexRiskContext {
         self.sessionID = .init()
         self.device = .init()
         self.app = .init()
-
-        // Start a new session on each app open event.
-        NotificationCenter.default
-            .onForeground { [weak self] _ in
-                self?.sessionID = .init()
-            }
     }
 }
