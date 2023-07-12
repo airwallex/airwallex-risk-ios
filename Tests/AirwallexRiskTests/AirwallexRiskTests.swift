@@ -23,9 +23,11 @@ final class AirwallexRiskTests: XCTestCase {
     }
 
     func testUserStorage() throws {
-        AirwallexRisk.start()
         let accountID = UUID()
         let userID = UUID()
+        AirwallexRisk.set(accountID: accountID, userID: userID)
+        XCTAssertNil(AirwallexRisk.shared.context)
+        AirwallexRisk.start()
         let context = try XCTUnwrap(AirwallexRisk.shared.context)
         XCTAssertNil(context.user.accountID)
         XCTAssertNil(context.user.userID)

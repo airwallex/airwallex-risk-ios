@@ -40,7 +40,11 @@ public class AirwallexRisk {
         accountID: UUID?,
         userID: UUID?
     ) {
-        shared.context?.update(
+        guard let context = shared.context else {
+            print(AirwallexValue.notStartedWarning)
+            return
+        }
+        context.update(
             user: .init(
                 accountID: accountID,
                 userID: userID
