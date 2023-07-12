@@ -11,6 +11,6 @@ import Foundation
 /// Automatically logged app lifecycle event type
 enum AutomaticEventType: String, Codable {
     case firstLaunch
-    case `open`
+    case open
     case background
 }
