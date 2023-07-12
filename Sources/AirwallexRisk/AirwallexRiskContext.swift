@@ -9,8 +9,10 @@
 import Foundation
 
 class AirwallexRiskContext {
+    @Storage(key: AirwallexUserDefaultKey.deviceID, defaultValue: .init())
+    private(set) var deviceID: UUID
     @Storage(key: AirwallexUserDefaultKey.user, defaultValue: .init())
-    var user: User
+    private(set) var user: User
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
     let sessionID: UUID
@@ -35,8 +37,12 @@ class AirwallexRiskContext {
         App name: \(app.name ?? "unknown")
         Environment: \(String(describing: environment))
         Tenant: \(tenant.rawValue)
-        DeviceID: \(device.id)
+        DeviceID: \(deviceID)
         SessionID: \(sessionID)
         """
+    }
+
+    func update(user: User) {
+        self.user = user
     }
 }

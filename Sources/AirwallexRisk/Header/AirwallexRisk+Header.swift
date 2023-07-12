@@ -20,7 +20,7 @@ extension AirwallexRisk {
         }
         return .init(
             field: AirwallexKey.header,
-            value: context.device.id.uuidString
+            value: context.deviceID.uuidString
         )
     }
 }

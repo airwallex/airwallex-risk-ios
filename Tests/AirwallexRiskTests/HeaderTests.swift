@@ -16,17 +16,29 @@ final class HeaderTests: XCTestCase {
         UserDefaults.sdk?.removeObject(forKey: AirwallexUserDefaultKey.deviceID)
     }
 
-    func testSetAirwallexHeader() throws {
+    func testSetAirwallexHeader() {
         var request = URLRequest(url: URL(string: "https://www.airwallex.com")!)
-        let header = try XCTUnwrap(AirwallexRisk.header)
-        XCTAssertNil(request.value(forHTTPHeaderField: header.field))
+        XCTAssertNil(request.value(forHTTPHeaderField: AirwallexKey.header))
         request.setAirwallexHeader()
-        XCTAssertEqual(request.value(forHTTPHeaderField: header.field), AirwallexRisk.shared.context?.device.id.uuidString)
+        XCTAssertEqual(request.value(forHTTPHeaderField: AirwallexKey.header), AirwallexRisk.shared.context?.deviceID.uuidString)
+    }
+
+    func testSetAirwallexHeaderNotStarted() {
+        AirwallexRisk.stop()
+        var request = URLRequest(url: URL(string: "https://www.airwallex.com")!)
+        XCTAssertNil(request.value(forHTTPHeaderField: AirwallexKey.header))
+        request.setAirwallexHeader()
+        XCTAssertNil(request.value(forHTTPHeaderField: AirwallexKey.header))
     }
 
     func testManualHeader() throws {
         let header = try XCTUnwrap(AirwallexRisk.header)
         XCTAssertEqual(header.field, AirwallexKey.header)
-        XCTAssertEqual(header.value, AirwallexRisk.shared.context?.device.id.uuidString)
+        XCTAssertEqual(header.value, AirwallexRisk.shared.context?.deviceID.uuidString)
+    }
+
+    func testNoHeaderWhenStopped() {
+        AirwallexRisk.stop()
+        XCTAssertNil(AirwallexRisk.header)
     }
 }
