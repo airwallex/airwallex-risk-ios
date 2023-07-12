@@ -9,9 +9,10 @@
 import Foundation
 
 extension AirwallexRisk {
-    /// Header to be attached to all airwallex.com requests.
+    /// Airwallex risk request header.
     ///
-    /// You can directly attach this header to a request with the `URLRequest` extension method `setAirwallexHeader()`.
+    /// This header should be attached to each request made to `www.airwallex.com`.
+    /// - Note: You can directly attach this header to a request with the `URLRequest` extension method `setAirwallexHeader()`.
     public static var header: Header? {
         guard let context = shared.context else {
             print(AirwallexValue.notStartedWarning)
