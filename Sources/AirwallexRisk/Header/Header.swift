@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Airwallex header type. Can be mapped to URL request headers.
 public struct Header {
     public let field: String
     public let value: String

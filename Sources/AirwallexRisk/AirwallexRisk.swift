@@ -55,7 +55,7 @@ public class AirwallexRisk {
     /// Add a new event to the queue.
     ///
     /// This is a public method for client apps to log specific lifecycle events, eg. login, logout.
-    /// - Parameter event: Event type.
+    /// - Parameter event: App event that triggered this method call.
     public static func log(event: AppEventType) {
         guard let eventManager = shared.eventManager,
               let context = shared.context else {

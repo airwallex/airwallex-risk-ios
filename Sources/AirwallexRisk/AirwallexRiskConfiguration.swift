@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// AirwallexRisk configuration. Can be passed in as a parameter of ``AirwallexRisk/AirwallexRisk/start(with:)`` to configure the SDK.
 public struct AirwallexRiskConfiguration {
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
