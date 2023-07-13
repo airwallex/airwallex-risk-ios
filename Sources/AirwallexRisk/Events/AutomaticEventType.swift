@@ -12,5 +12,4 @@ import Foundation
 enum AutomaticEventType: String, Codable {
     case firstLaunch
     case open
-    case background
 }

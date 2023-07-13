@@ -13,9 +13,8 @@ final class EventTypeTests: XCTestCase {
     func testInitFromStringValue() {
         XCTAssertEqual(EventType.automatic(event: .firstLaunch), EventType(stringValue: "firstLaunch"))
         XCTAssertEqual(EventType.automatic(event: .open), EventType(stringValue: "open"))
-        XCTAssertEqual(EventType.automatic(event: .background), EventType(stringValue: "background"))
         XCTAssertEqual(EventType.app(event: .login), EventType(stringValue: "login"))
-        XCTAssertEqual(EventType.app(event: .logout), EventType(stringValue: "logout"))
+        XCTAssertEqual(EventType.app(event: .payout), EventType(stringValue: "payout"))
         XCTAssertEqual(EventType.unknown, EventType(stringValue: "unknown"))
         XCTAssertEqual(EventType.unknown, EventType(stringValue: "firstLunch"))
     }

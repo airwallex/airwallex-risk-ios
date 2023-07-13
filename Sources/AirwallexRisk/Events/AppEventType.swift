@@ -11,5 +11,5 @@ import Foundation
 /// App lifecycle event type.
 public enum AppEventType: String, Codable {
     case login
-    case logout
+    case payout
 }
