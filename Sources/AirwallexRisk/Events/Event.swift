@@ -39,4 +39,18 @@ struct Event: Codable {
         self.device = .init(device: context.device)
         self.createdAtUTC = createdAtUTC
     }
+
+    enum CodingKeys: String, CodingKey {
+        case eventID = "eventId"
+        case type
+        case accountID = "accountId"
+        case userID = "userId"
+        case deviceID = "deviceId"
+        case sessionID = "sessionId"
+        case tenant
+        case isApp
+        case app
+        case device
+        case createdAtUTC
+    }
 }
