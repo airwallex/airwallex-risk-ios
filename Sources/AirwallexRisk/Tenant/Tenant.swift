@@ -12,6 +12,8 @@ import Foundation
 public enum Tenant: String, Codable {
     /// Reserved for the Airwallex mobile app.
     case `internal` = "mobile-app"
+    /// Use with the Airwallex payment SDK.
+    case pa = "pa-checkout"
     /// Default tenant for most users.
     case scale = "scale"
 }
