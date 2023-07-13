@@ -23,7 +23,7 @@ final class EventTypeTests: XCTestCase {
     func testCodableAutomaticEventType() throws {
         let event = MockEvent(type: .automatic(event: .open))
         let data = try JSONEncoder().encode(event)
-        XCTAssertEqual(data.jsonString, "{\"type\":\"open\"}")
+        XCTAssertEqual(try data.jsonString, "{\"type\":\"open\"}")
         let decodedEvent = try JSONDecoder().decode(MockEvent.self, from: data)
         XCTAssertEqual(event.type, decodedEvent.type)
     }
@@ -31,7 +31,7 @@ final class EventTypeTests: XCTestCase {
     func testCodableAppEventType() throws {
         let event = MockEvent(type: .app(event: .login))
         let data = try JSONEncoder().encode(event)
-        XCTAssertEqual(data.jsonString, "{\"type\":\"login\"}")
+        XCTAssertEqual(try data.jsonString, "{\"type\":\"login\"}")
         let decodedEvent = try JSONDecoder().decode(MockEvent.self, from: data)
         XCTAssertEqual(event.type, decodedEvent.type)
     }
@@ -39,7 +39,7 @@ final class EventTypeTests: XCTestCase {
     func testCodableUnknownEventType() throws {
         let event = MockEvent(type: .unknown)
         let data = try JSONEncoder().encode(event)
-        XCTAssertEqual(data.jsonString, "{\"type\":\"unknown\"}")
+        XCTAssertEqual(try data.jsonString, "{\"type\":\"unknown\"}")
         let decodedEvent = try JSONDecoder().decode(MockEvent.self, from: data)
         XCTAssertEqual(event.type, decodedEvent.type)
     }
@@ -47,14 +47,4 @@ final class EventTypeTests: XCTestCase {
 
 private struct MockEvent: Codable {
     let type: EventType
-}
-
-private extension Data {
-    var jsonString: String? {
-        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
-              let data = try? JSONSerialization.data(withJSONObject: object, options: [.sortedKeys]),
-              let jsonString = String(data: data, encoding: .utf8) else { return nil }
-
-        return jsonString
-    }
 }
