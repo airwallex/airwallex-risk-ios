@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Device: Codable, Equatable {
+struct Device {
     init() {
         UIDevice.current.isBatteryMonitoringEnabled = true
     }
@@ -38,7 +38,7 @@ struct Device: Codable, Equatable {
     ///
     /// Example of return values
     ///  - `"US"`
-    var countryISO: String? = {
+    var region: String? = {
         if #available(iOS 16, *) {
             return Locale.current.language.region?.identifier
         } else {
@@ -100,9 +100,9 @@ struct Device: Codable, Equatable {
     ///
     /// Example of return values
     ///  - `"3.0"`
-    var pixelDensity: String {
+    var pixelDensity: String = {
         String(describing: UIScreen.main.scale)
-    }
+    }()
 
     /// Current battery level of device as a value between 0.0 (flat) and 1.0 (fully charged)
     ///

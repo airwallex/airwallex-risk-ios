@@ -15,7 +15,7 @@ final class DeviceTests: XCTestCase {
     func testValues() {
         XCTAssertNotNil(device.timezone)
         XCTAssertNotNil(device.language)
-        XCTAssertNotNil(device.countryISO)
+        XCTAssertNotNil(device.region)
         XCTAssertEqual(device.osName, UIDevice.current.systemName)
         XCTAssertEqual(device.osVersion, UIDevice.current.systemVersion)
         XCTAssertEqual(device.model.prefix(6), "iPhone")

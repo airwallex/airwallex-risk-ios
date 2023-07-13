@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct App: Codable, Equatable {
+struct App: Codable {
 
     /// App name.
     ///
@@ -44,9 +44,9 @@ struct App: Codable, Equatable {
     }()
 
     /// Determine if the app can be refreshed in the background.
-    var isBackgroundEnabled: Bool = {
+    var isBackgroundEnabled: Bool {
         UIApplication.shared.isBackgroundEnabled
-    }()
+    }
 
     /// Airwallex Risk SDK version.
     ///

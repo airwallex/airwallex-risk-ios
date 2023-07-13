@@ -35,8 +35,8 @@ struct Event: Codable {
         self.sessionID = context.sessionID
         self.tenant = context.tenant
         self.isApp = true
-        self.app = context.app
-        self.device = context.device
+        self.app = .init(app: context.app)
+        self.device = .init(device: context.device)
         self.createdAtUTC = createdAtUTC
     }
 }
