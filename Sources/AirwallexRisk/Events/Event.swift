@@ -11,8 +11,8 @@ import Foundation
 struct Event: Codable {
     let eventID: UUID
     let type: EventType
-    let accountID: UUID?
-    let userID: UUID?
+    let accountID: String?
+    let userID: String?
     let deviceID: UUID
     let sessionID: UUID
     let tenant: Tenant
@@ -20,16 +20,18 @@ struct Event: Codable {
     let app: App
     let device: Device
     let createdAtUTC: Date
+    let screen: Screen
 
     init(
         eventID: UUID = .init(),
         type: EventType,
+        path: String?,
         context: AirwallexRiskContext,
         createdAtUTC: Date = .init()
     ) {
         self.eventID = eventID
         self.type = type
-        self.accountID = context.user.accountID
+        self.accountID = context.accountID
         self.userID = context.user.userID
         self.deviceID = context.deviceID
         self.sessionID = context.sessionID
@@ -38,6 +40,7 @@ struct Event: Codable {
         self.app = .init(app: context.app)
         self.device = .init(device: context.device)
         self.createdAtUTC = createdAtUTC
+        self.screen = .init(path: path)
     }
 
     enum CodingKeys: String, CodingKey {
@@ -52,5 +55,6 @@ struct Event: Codable {
         case app
         case device
         case createdAtUTC
+        case screen
     }
 }

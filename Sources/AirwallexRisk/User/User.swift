@@ -9,14 +9,11 @@
 import Foundation
 
 struct User: Codable {
-    let accountID: UUID?
-    let userID: UUID?
+    let userID: String?
 
     init(
-        accountID: UUID? = nil,
-        userID: UUID? = nil
+        userID: String? = nil
     ) {
-        self.accountID = accountID
         self.userID = userID
     }
 }

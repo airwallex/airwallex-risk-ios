@@ -17,34 +17,29 @@ final class AirwallexRiskTests: XCTestCase {
     func testStart() {
         XCTAssertNil(AirwallexRisk.shared.context)
         XCTAssertNil(AirwallexRisk.shared.eventManager)
-        AirwallexRisk.start()
+        AirwallexRisk.start(accountID: "accountID")
         XCTAssertNotNil(AirwallexRisk.shared.context)
         XCTAssertNotNil(AirwallexRisk.shared.eventManager)
     }
 
     func testUserStorage() throws {
-        let accountID = UUID()
-        let userID = UUID()
-        AirwallexRisk.set(accountID: accountID, userID: userID)
+        let userID = "userID"
+        AirwallexRisk.set(userID: userID)
         XCTAssertNil(AirwallexRisk.shared.context)
-        AirwallexRisk.start()
+        AirwallexRisk.start(accountID: "accountID")
         let context = try XCTUnwrap(AirwallexRisk.shared.context)
-        XCTAssertNil(context.user.accountID)
         XCTAssertNil(context.user.userID)
-        AirwallexRisk.set(accountID: accountID, userID: userID)
-        XCTAssertEqual(context.user.accountID, accountID)
+        AirwallexRisk.set(userID: userID)
         XCTAssertEqual(context.user.userID, userID)
-        AirwallexRisk.set(accountID: accountID, userID: nil)
-        XCTAssertEqual(context.user.accountID, accountID)
+        AirwallexRisk.set(userID: nil)
         XCTAssertNil(context.user.userID)
 
         UserDefaults.sdk?.removeObject(forKey: AirwallexUserDefaultKey.user)
-        XCTAssertNil(context.user.accountID)
         XCTAssertNil(context.user.userID)
     }
 
     func testLogEvent() throws {
-        AirwallexRisk.start()
+        AirwallexRisk.start(accountID: "accountID")
         let eventManager = try XCTUnwrap(AirwallexRisk.shared.eventManager)
         XCTAssertTrue(eventManager.repository.events.isEmpty)
         AirwallexRisk.log(event: .login)

@@ -14,7 +14,7 @@ final class NetworkTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        AirwallexRisk.start()
+        AirwallexRisk.start(accountID: "accountID")
     }
 
     func testMapGetURLRequest() throws {

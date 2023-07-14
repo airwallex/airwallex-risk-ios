@@ -11,7 +11,7 @@ import XCTest
 
 final class AirwallexRiskContextTests: XCTestCase {
     func testOnForegroundSessionIDDoesNotChange() {
-        let context = AirwallexRiskContext(environment: .production, tenant: .scale)
+        let context = AirwallexRiskContext(accountID: "accountID", environment: .production, tenant: .scale)
         let initialSessionID = context.sessionID
         NotificationCenter.default.post(
             name: UIApplication.willEnterForegroundNotification,
@@ -22,7 +22,7 @@ final class AirwallexRiskContextTests: XCTestCase {
     }
 
     func testOnBackgroundSessionIDDoesNotChange() {
-        let context = AirwallexRiskContext(environment: .production, tenant: .scale)
+        let context = AirwallexRiskContext(accountID: "accountID", environment: .production, tenant: .scale)
         let initialSessionID = context.sessionID
         NotificationCenter.default.post(
             name: UIApplication.willResignActiveNotification,

@@ -15,14 +15,20 @@ public class AirwallexRisk {
 
     /// Start the `AirwallexRisk` SDK.
     ///
-    /// - Parameter configuration: ``AirwallexRiskConfiguration`` can be passed in if additional configuration is needed.
+    /// - Parameters:
+    ///   - accountID: Airwallex account ID for app customer. Required for all scale customers.
+    ///   - configuration: ``AirwallexRiskConfiguration`` can be passed in if additional configuration is needed.
     /// - Remark: Must be called once, as early as possible in the apps lifecycle.
-    public static func start(with configuration: AirwallexRiskConfiguration = .init()) {
+    public static func start(
+        accountID: String?,
+        with configuration: AirwallexRiskConfiguration = .init()
+    ) {
         guard shared.context == nil else {
             print("AirwallexRisk has already started.")
             return
         }
         shared.context = .init(
+            accountID: accountID,
             environment: configuration.environment,
             tenant: configuration.tenant
         )
@@ -32,31 +38,29 @@ public class AirwallexRisk {
 
     /// Stores the signed in Airwallex account and user IDs.
     ///
-    /// Use this method after user sign in/out to store the user properties to be sent with events.
+    /// Use this method after user sign in/out to store the user ID to be sent with events.
     /// - Parameters:
-    ///   - accountID: Signed in Airwallex account ID. Set `nil` when signed out.
-    ///   - userID: Signed in Airwallex user ID. Set `nil` when signed out.
-    public static func set(
-        accountID: UUID?,
-        userID: UUID?
-    ) {
+    ///   - userID: Signed in Airwallex user ID. Set `nil` on sign out.
+    public static func set(userID: String?) {
         guard let context = shared.context else {
             print(AirwallexValue.notStartedWarning)
             return
         }
         context.update(
-            user: .init(
-                accountID: accountID,
-                userID: userID
-            )
+            user: .init(userID: userID)
         )
     }
 
     /// Add a new event to the queue.
     ///
     /// This is a public method for client apps to log specific lifecycle events, eg. login, logout.
-    /// - Parameter event: App event that triggered this method call.
-    public static func log(event: AppEventType) {
+    /// - Parameters:
+    ///   - event: App event that triggered this method call.
+    ///   - screen: Current app view. Optional.
+    public static func log(
+        event: AppEventType,
+        screen: String? = nil
+    ) {
         guard let eventManager = shared.eventManager,
               let context = shared.context else {
             print(AirwallexValue.notStartedWarning)
@@ -65,6 +69,7 @@ public class AirwallexRisk {
         eventManager.queue(
             event: .init(
                 type: .app(event: event),
+                path: screen,
                 context: context
             )
         )

@@ -12,14 +12,14 @@ import XCTest
 final class EventTests: XCTestCase {
     func testInitFromContext() {
         let eventID = UUID()
-        let context = AirwallexRiskContext(environment: .production, tenant: .scale)
+        let context = AirwallexRiskContext(accountID: "accountID", environment: .production, tenant: .scale)
         let event = Event.mock(eventID: eventID, context: context)
         XCTAssertEqual(event.eventID, eventID)
         switch event.type {
         case .automatic(.open): break
         default: XCTFail("Should be `.automatic(.open)`")
         }
-        XCTAssertNil(event.accountID)
+        XCTAssertEqual(event.accountID, "accountID")
         XCTAssertNil(event.userID)
         XCTAssertEqual(event.deviceID, context.deviceID)
         XCTAssertEqual(event.sessionID, context.sessionID)
@@ -30,12 +30,12 @@ final class EventTests: XCTestCase {
     }
 
     func testUserFromContext() {
-        let context = AirwallexRiskContext(environment: .production, tenant: .scale)
-        context.update(user: .init(accountID: UUID(), userID: UUID()))
+        let context = AirwallexRiskContext(accountID: "accountID", environment: .production, tenant: .scale)
+        context.update(user: .init(userID: "userID"))
         XCTAssertNotNil(Event.mock(context: context).accountID)
         XCTAssertNotNil(Event.mock(context: context).userID)
-        context.update(user: .init(accountID: nil, userID: nil))
-        XCTAssertNil(Event.mock(context: context).accountID)
+        context.update(user: .init(userID: nil))
+        XCTAssertEqual(Event.mock(context: context).accountID, "accountID")
         XCTAssertNil(Event.mock(context: context).userID)
     }
 }

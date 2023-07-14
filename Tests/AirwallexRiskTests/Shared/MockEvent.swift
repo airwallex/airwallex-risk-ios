@@ -12,12 +12,13 @@ import Foundation
 extension Event {
     static func mock(
         eventID: UUID = .init(),
-        context: AirwallexRiskContext = .init(environment: .production, tenant: .scale),
+        context: AirwallexRiskContext = .init(accountID: "accountID", environment: .production, tenant: .scale),
         createdAtUTC: Date = .init()
     ) -> Event {
         .init(
             eventID: eventID,
             type: .automatic(event: .open),
+            path: "path",
             context: context,
             createdAtUTC: createdAtUTC
         )
