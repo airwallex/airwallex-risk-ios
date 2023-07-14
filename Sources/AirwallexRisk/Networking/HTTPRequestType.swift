@@ -16,7 +16,7 @@ protocol HTTPRequestType {
 extension HTTPRequestType {
     var host: String {
         get throws {
-            guard let context = AirwallexRisk.shared.context else {
+            guard let context = AirwallexRisk.shared?.context else {
                 print(AirwallexValue.notStartedWarning)
                 throw HTTPRequestError.invalidURL
             }
