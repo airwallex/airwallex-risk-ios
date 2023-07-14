@@ -13,10 +13,7 @@ final class EventTypeTests: XCTestCase {
     func testInitFromStringValue() {
         XCTAssertEqual(EventType.automatic(event: .firstLaunch), EventType(stringValue: "firstLaunch"))
         XCTAssertEqual(EventType.automatic(event: .open), EventType(stringValue: "open"))
-        XCTAssertEqual(EventType.app(event: .login), EventType(stringValue: "login"))
-        XCTAssertEqual(EventType.app(event: .payout), EventType(stringValue: "payout"))
-        XCTAssertEqual(EventType.unknown, EventType(stringValue: "unknown"))
-        XCTAssertEqual(EventType.unknown, EventType(stringValue: "firstLunch"))
+        XCTAssertEqual(EventType.custom(event: "login"), EventType(stringValue: "login"))
     }
 
     func testCodableAutomaticEventType() throws {
@@ -28,17 +25,9 @@ final class EventTypeTests: XCTestCase {
     }
 
     func testCodableAppEventType() throws {
-        let event = MockEvent(type: .app(event: .login))
+        let event = MockEvent(type: .custom(event: "login"))
         let data = try JSONEncoder().encode(event)
         XCTAssertEqual(try data.jsonString, "{\"type\":\"login\"}")
-        let decodedEvent = try JSONDecoder().decode(MockEvent.self, from: data)
-        XCTAssertEqual(event.type, decodedEvent.type)
-    }
-
-    func testCodableUnknownEventType() throws {
-        let event = MockEvent(type: .unknown)
-        let data = try JSONEncoder().encode(event)
-        XCTAssertEqual(try data.jsonString, "{\"type\":\"unknown\"}")
         let decodedEvent = try JSONDecoder().decode(MockEvent.self, from: data)
         XCTAssertEqual(event.type, decodedEvent.type)
     }

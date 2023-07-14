@@ -10,19 +10,21 @@ import Foundation
 
 /// App lifecycle event types. Split into public app events, and events automatically logged by the SDK.
 enum EventType: Equatable {
-    case app(event: AppEventType)
-    case automatic(event: AutomaticEventType)
-    case unknown
+    enum SDKEvent: String, Codable {
+        case firstLaunch
+        case open
+    }
+
+    case automatic(event: SDKEvent)
+    case custom(event: String)
 }
 
 extension EventType {
     init(stringValue: String) {
-        if let event = AppEventType(rawValue: stringValue) {
-            self = .app(event: event)
-        } else if let event = AutomaticEventType(rawValue: stringValue) {
+        if let event = SDKEvent(rawValue: stringValue) {
             self = .automatic(event: event)
         } else {
-            self = .unknown
+            self = .custom(event: stringValue)
         }
     }
 }
@@ -37,12 +39,10 @@ extension EventType: Codable {
     public func encode(to encoder: Encoder) throws {
         var value = encoder.singleValueContainer()
         switch self {
-        case .app(let event):
+        case .custom(let event):
             try value.encode(event)
         case .automatic(let event):
             try value.encode(event)
-        case .unknown:
-            try value.encode(AirwallexValue.unknown)
         }
     }
 }

@@ -11,9 +11,7 @@ import Foundation
 struct User: Codable {
     let userID: String?
 
-    init(
-        userID: String? = nil
-    ) {
+    init(userID: String? = nil) {
         self.userID = userID
     }
 }

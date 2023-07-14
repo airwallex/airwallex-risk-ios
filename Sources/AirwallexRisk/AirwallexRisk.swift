@@ -58,7 +58,7 @@ public class AirwallexRisk {
     ///   - event: App event that triggered this method call.
     ///   - screen: Current app view. Optional.
     public static func log(
-        event: AppEventType,
+        event: String,
         screen: String? = nil
     ) {
         guard let eventManager = shared.eventManager,
@@ -68,7 +68,7 @@ public class AirwallexRisk {
         }
         eventManager.queue(
             event: .init(
-                type: .app(event: event),
+                type: .custom(event: event),
                 path: screen,
                 context: context
             )

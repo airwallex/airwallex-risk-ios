@@ -42,14 +42,14 @@ final class AirwallexRiskTests: XCTestCase {
         AirwallexRisk.start(accountID: "accountID")
         let eventManager = try XCTUnwrap(AirwallexRisk.shared.eventManager)
         XCTAssertTrue(eventManager.repository.events.isEmpty)
-        AirwallexRisk.log(event: .login)
+        AirwallexRisk.log(event: "login")
         XCTAssertEqual(eventManager.repository.events.count, 1)
-        XCTAssertEqual(eventManager.repository.events.first?.type, .app(event: .login))
+        XCTAssertEqual(eventManager.repository.events.first?.type, .custom(event: "login"))
     }
 
     func testLogEventNotStarted() {
         XCTAssertNil(AirwallexRisk.shared.eventManager)
-        AirwallexRisk.log(event: .login)
+        AirwallexRisk.log(event: "login")
         XCTAssertNil(AirwallexRisk.shared.eventManager)
     }
 }
