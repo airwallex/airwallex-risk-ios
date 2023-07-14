@@ -24,8 +24,8 @@ final class EventTests: XCTestCase {
         XCTAssertEqual(event.deviceID, context.deviceID)
         XCTAssertEqual(event.sessionID, context.sessionID)
         XCTAssertEqual(event.tenant, context.tenant)
-        XCTAssertEqual(event.app, .init(app: context.app))
-        XCTAssertEqual(event.device, .init(device: context.device))
+        XCTAssertEqual(event.app, .init(app: context.dataCollector.app))
+        XCTAssertEqual(event.device, .init(device: context.dataCollector.device))
     }
 
     func testUserFromContext() {

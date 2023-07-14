@@ -34,8 +34,8 @@ struct Event: Codable {
         self.tenant = context.tenant
         self.accountID = context.accountID
         self.userID = context.user.userID
-        self.app = .init(app: context.app)
-        self.device = .init(device: context.device)
+        self.app = .init(app: context.dataCollector.app)
+        self.device = .init(device: context.dataCollector.device)
         self.createdAtUTC = createdAtUTC
         self.type = type
         self.screen = .init(path: path)

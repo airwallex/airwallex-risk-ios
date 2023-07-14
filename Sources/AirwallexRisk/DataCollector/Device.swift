@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 
 struct Device {
-    init() {
-        UIDevice.current.isBatteryMonitoringEnabled = true
-    }
-
     /// Device language.
     ///
     /// Example of return values

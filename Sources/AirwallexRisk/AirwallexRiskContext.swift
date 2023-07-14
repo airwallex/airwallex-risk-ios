@@ -17,8 +17,7 @@ class AirwallexRiskContext {
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
     let sessionID: UUID
-    let device: Device
-    let app: App
+    let dataCollector: DataCollector
 
     init(
         accountID: String?,
@@ -29,14 +28,16 @@ class AirwallexRiskContext {
         self.environment = environment
         self.tenant = tenant
         self.sessionID = .init()
-        self.device = .init()
-        self.app = .init()
+        self.dataCollector = .init(
+            app: .init(),
+            device: .init()
+        )
         print("+++ Context +++\n\(description)\n")
     }
 
     var description: String {
         """
-        App name: \(app.name ?? "unknown")
+        App name: \(dataCollector.app.name ?? "unknown")
         AccountID: \(String(describing: accountID))
         Environment: \(String(describing: environment))
         Tenant: \(tenant.rawValue)

@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 struct App: Codable {
-
     /// App name.
     ///
     /// Example of return values
