@@ -15,9 +15,7 @@ final class AppTests: XCTestCase {
     func testValues() {
         XCTAssertNotNil(app.name)
         XCTAssertNotNil(app.version)
-        XCTAssertNotNil(app.build)
         XCTAssertNotNil(app.language)
         XCTAssertNotNil(app.sdkVersion)
-        XCTAssertEqual(app.isBackgroundEnabled, UIApplication.shared.isBackgroundEnabled)
     }
 }

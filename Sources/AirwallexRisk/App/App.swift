@@ -27,14 +27,6 @@ struct App: Codable {
         Bundle.appValue(for: .version)
     }()
 
-    /// App build.
-    ///
-    /// Example of return values
-    ///  - `"123"`
-    var build: String? = {
-        Bundle.appValue(for: .build)
-    }()
-
     /// App language. This indicate the language (of text) the user is most likely seeing in the UI.
     ///
     /// Example of return values
@@ -42,11 +34,6 @@ struct App: Codable {
     var language: String? = {
         Bundle.main.preferredLocalizations.first
     }()
-
-    /// Determine if the app can be refreshed in the background.
-    var isBackgroundEnabled: Bool {
-        UIApplication.shared.isBackgroundEnabled
-    }
 
     /// Airwallex Risk SDK version.
     ///

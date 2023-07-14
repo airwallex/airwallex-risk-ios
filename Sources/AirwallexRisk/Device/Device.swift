@@ -14,14 +14,6 @@ struct Device {
         UIDevice.current.isBatteryMonitoringEnabled = true
     }
 
-    /// Device timezone.
-    ///
-    /// Example of return values
-    ///  - `"Australia/Melbourne"`
-    var timezone: String? = {
-        TimeZone.current.identifier
-    }()
-
     /// Device language.
     ///
     /// Example of return values
@@ -46,6 +38,14 @@ struct Device {
         }
     }()
 
+    /// Device timezone.
+    ///
+    /// Example of return values
+    ///  - `"Australia/Melbourne"`
+    var timezone: String? = {
+        TimeZone.current.identifier
+    }()
+
     /// Device operating system name.
     ///
     /// Example of return values
@@ -67,7 +67,7 @@ struct Device {
     /// Example of return values
     ///  - `"iPhone8,1"` = iPhone 6s
     ///  - `"iPad6,7"` = iPad Pro (12.9-inch)
-    var model: String = {
+    var modelName: String = {
         if let identifier = ProcessInfo().environment[AirwallexKey.simulatorModelIdentifier] {
             return "\(identifier) \(AirwallexValue.simulator)"
         }
@@ -86,55 +86,4 @@ struct Device {
     var modelBrand: String = {
         AirwallexValue.apple
     }()
-
-    /// Device screen size.
-    ///
-    /// Example of return values
-    ///  - `"375.0x812.0"`
-    var screenSize: String {
-        let screen = UIScreen.main.bounds
-        return "\(screen.width)X\(screen.height)"
-    }
-
-    /// Device  natural scale factor associated with the screen.
-    ///
-    /// Example of return values
-    ///  - `"3.0"`
-    var pixelDensity: String = {
-        String(describing: UIScreen.main.scale)
-    }()
-
-    /// Current battery level of device as a value between 0.0 (flat) and 1.0 (fully charged)
-    ///
-    /// Example of return values
-    ///  - `"0.9"`
-    var batteryLevel: String {
-        String(describing: UIDevice.current.batteryLevel)
-    }
-
-    /// Current battery charging state
-    ///
-    /// Example of return values
-    ///  - `"charging"`
-    var batteryState: String {
-        switch UIDevice.current.batteryState {
-        case .unplugged: return "unplugged"
-        case .charging: return "charging"
-        case .full: return "full"
-        default: return AirwallexValue.unknown
-        }
-    }
-
-    /// Available device storage capacity in bytes.
-    ///
-    /// Example of return values
-    ///  - `"236430798848"`
-    var storageCapacity: String {
-        let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
-        let values = try? fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
-        guard let capacity = values?.volumeAvailableCapacity else {
-            return AirwallexValue.unknown
-        }
-        return String(describing: capacity)
-    }
 }

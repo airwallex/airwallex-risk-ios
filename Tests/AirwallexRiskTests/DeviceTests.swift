@@ -18,10 +18,7 @@ final class DeviceTests: XCTestCase {
         XCTAssertNotNil(device.region)
         XCTAssertEqual(device.osName, UIDevice.current.systemName)
         XCTAssertEqual(device.osVersion, UIDevice.current.systemVersion)
-        XCTAssertEqual(device.model.prefix(6), "iPhone")
+        XCTAssertEqual(device.modelName.prefix(2), "iP") // iPad, iPhone
         XCTAssertEqual(device.modelBrand, "Apple")
-        XCTAssertEqual(device.screenSize, "\(UIScreen.main.bounds.width)X\(UIScreen.main.bounds.height)")
-        XCTAssertEqual(device.pixelDensity, String(describing: UIScreen.main.scale))
-        XCTAssertEqual(device.batteryLevel, String(describing: UIDevice.current.batteryLevel))
     }
 }

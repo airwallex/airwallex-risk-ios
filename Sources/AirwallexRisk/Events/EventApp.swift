@@ -10,12 +10,13 @@ import Foundation
 
 extension Event {
     struct App: Codable, Equatable {
+        struct SDK: Codable, Equatable {
+            let version: String?
+        }
         let name: String?
         let version: String?
-        let build: String?
         let language: String?
-        let isBackgroundEnabled: Bool
-        let sdkVersion: String?
+        let sdk: SDK
     }
 }
 
@@ -23,9 +24,7 @@ extension Event.App {
     init(app: App) {
         self.name = app.name
         self.version = app.version
-        self.build = app.build
         self.language = app.language
-        self.isBackgroundEnabled = app.isBackgroundEnabled
-        self.sdkVersion = app.sdkVersion
+        self.sdk = .init(version: app.sdkVersion)
     }
 }

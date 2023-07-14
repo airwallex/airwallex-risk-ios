@@ -17,10 +17,10 @@ extension Event {
     ) -> Event {
         .init(
             eventID: eventID,
+            createdAtUTC: createdAtUTC,
             type: .automatic(event: .open),
             path: "path",
-            context: context,
-            createdAtUTC: createdAtUTC
+            context: context
         )
     }
 }

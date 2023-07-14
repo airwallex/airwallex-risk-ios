@@ -13,7 +13,7 @@ class AirwallexRiskContext {
     private(set) var deviceID: UUID
     @Storage(key: AirwallexUserDefaultKey.user, defaultValue: .init())
     private(set) var user: User
-    let accountID: String?
+    var accountID: String?
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
     let sessionID: UUID

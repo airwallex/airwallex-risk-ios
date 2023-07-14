@@ -36,7 +36,7 @@ public class AirwallexRisk {
         shared.eventManager = .init()
     }
 
-    /// Stores the signed in Airwallex account and user IDs.
+    /// Stores the signed in Airwallex  user ID.
     ///
     /// Use this method after user sign in/out to store the user ID to be sent with events.
     /// - Parameters:
