@@ -9,8 +9,8 @@
 import Foundation
 
 public class AirwallexRisk {
-    let context: AirwallexRiskContext
-    let eventManager: EventManager
+    private let context: AirwallexRiskContext
+    private let eventManager: EventManager
 
     init(
         context: AirwallexRiskContext,
@@ -20,6 +20,16 @@ public class AirwallexRisk {
         self.eventManager = eventManager
     }
 
+    /// Airwallex risk request header.
+    ///
+    /// This header should be attached to each request made to `www.airwallex.com`.
+    var header: Header {
+        .init(
+            field: AirwallexKey.header,
+            value: context.deviceID.uuidString
+        )
+    }
+
     /// Stores the signed in Airwallex  user ID.
     ///
     /// Use this method after user sign in/out to store the user ID to be sent with events.
@@ -27,7 +37,7 @@ public class AirwallexRisk {
     ///   - userID: Signed in Airwallex user ID. Set `nil` on sign out.
     func set(userID: String?) {
         context.update(
-            user: .init(userID: userID)
+            user: .init(id: userID)
         )
     }
 

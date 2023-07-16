@@ -68,16 +68,12 @@ final class NetworkTests: XCTestCase {
             XCTAssertEqual(statusCode, 500)
         }
     }
-
-    func testNotStarted() {
-        AirwallexRisk.stop()
-        let mockRequest = MockHTTPRequest()
-        let urlRequest = try? URLRequest(request: mockRequest)
-        XCTAssertNil(urlRequest)
-    }
 }
 
 private struct MockHTTPRequest: HTTPRequestType {
+    var host: String {
+        "www.airwallex.com"
+    }
     let path: String
     let method: HTTPRequestMethod
 

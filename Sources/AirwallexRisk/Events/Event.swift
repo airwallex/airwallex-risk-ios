@@ -25,7 +25,7 @@ struct Event: Codable {
         eventID: UUID = .init(),
         createdAtUTC: Date = .init(),
         type: EventType,
-        path: String?,
+        path: String? = nil,
         context: AirwallexRiskContext
     ) {
         self.eventID = eventID
@@ -33,7 +33,7 @@ struct Event: Codable {
         self.sessionID = context.sessionID
         self.tenant = context.tenant
         self.accountID = context.accountID
-        self.userID = context.user.userID
+        self.userID = context.user.id
         self.app = .init(app: context.dataCollector.app)
         self.device = .init(device: context.dataCollector.device)
         self.createdAtUTC = createdAtUTC

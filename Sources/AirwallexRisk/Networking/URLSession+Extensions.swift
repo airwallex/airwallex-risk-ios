@@ -19,7 +19,6 @@ extension URLSession {
         let statusCode = (response as? HTTPURLResponse)?.statusCode
         switch statusCode {
         case .some(200...299): break
-        // case .some(400...499): // TODO: check if specific data/error object will be provided
         default: throw HTTPResponseError.invalid(statusCode: statusCode)
         }
         return try JSONDecoder().decode(T.self, from: data)

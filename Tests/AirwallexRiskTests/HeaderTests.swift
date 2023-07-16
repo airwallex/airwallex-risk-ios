@@ -20,7 +20,7 @@ final class HeaderTests: XCTestCase {
         var request = URLRequest(url: URL(string: "https://www.airwallex.com")!)
         XCTAssertNil(request.value(forHTTPHeaderField: AirwallexKey.header))
         request.setAirwallexHeader()
-        XCTAssertEqual(request.value(forHTTPHeaderField: AirwallexKey.header), AirwallexRisk.shared?.context.deviceID.uuidString)
+        XCTAssertNotNil(request.value(forHTTPHeaderField: AirwallexKey.header))
     }
 
     func testSetAirwallexHeaderNotStarted() {
@@ -34,7 +34,7 @@ final class HeaderTests: XCTestCase {
     func testManualHeader() throws {
         let header = try XCTUnwrap(AirwallexRisk.header)
         XCTAssertEqual(header.field, AirwallexKey.header)
-        XCTAssertEqual(header.value, AirwallexRisk.shared?.context.deviceID.uuidString)
+        XCTAssertNotNil(header.value)
     }
 
     func testNoHeaderWhenStopped() {
