@@ -9,11 +9,9 @@
 import Foundation
 
 class AirwallexRiskContext {
-    @Storage(key: AirwallexUserDefaultKey.deviceID, defaultValue: .init())
-    private(set) var deviceID: UUID
-    @Storage(key: AirwallexUserDefaultKey.user, defaultValue: .init())
-    private(set) var user: User
-    var accountID: String?
+    private(set) var deviceID: Storage<UUID>
+    private(set) var account: Storage<Account>
+    private(set) var user: Storage<User>
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
     let sessionID: UUID
@@ -22,9 +20,22 @@ class AirwallexRiskContext {
     init(
         accountID: String?,
         environment: AirwallexRiskEnvironment,
-        tenant: Tenant
+        tenant: Tenant,
+        defaults: UserDefaults? = .sdk
     ) {
-        self.accountID = accountID
+        self.deviceID = .init(
+            key: AirwallexUserDefaultKey.deviceID,
+            defaults: defaults
+        )
+        self.account = .init(
+            key: AirwallexUserDefaultKey.account,
+            defaults: defaults
+        )
+        self.account.wrappedValue = .init(id: accountID)
+        self.user = .init(
+            key: AirwallexUserDefaultKey.user,
+            defaults: defaults
+        )
         self.environment = environment
         self.tenant = tenant
         self.sessionID = .init()
@@ -32,13 +43,14 @@ class AirwallexRiskContext {
             app: .init(),
             device: .init()
         )
+
         print("+++ Context +++\n\(description)\n")
     }
 
     var description: String {
         """
         App name: \(dataCollector.app.name ?? "unknown")
-        AccountID: \(String(describing: accountID))
+        AccountID: \(String(describing: account.wrappedValue.id))
         Environment: \(String(describing: environment))
         Tenant: \(tenant.rawValue)
         DeviceID: \(deviceID)
@@ -46,7 +58,11 @@ class AirwallexRiskContext {
         """
     }
 
+    func update(account: Account) {
+        self.account.wrappedValue = account
+    }
+
     func update(user: User) {
-        self.user = user
+        self.user.wrappedValue = user
     }
 }

@@ -29,11 +29,11 @@ struct Event: Codable {
         context: AirwallexRiskContext
     ) {
         self.eventID = eventID
-        self.deviceID = context.deviceID
+        self.deviceID = context.deviceID.wrappedValue
         self.sessionID = context.sessionID
         self.tenant = context.tenant
-        self.accountID = context.accountID
-        self.userID = context.user.id
+        self.accountID = context.account.wrappedValue.id
+        self.userID = context.user.wrappedValue.id
         self.app = .init(app: context.dataCollector.app)
         self.device = .init(device: context.dataCollector.device)
         self.createdAtUTC = createdAtUTC

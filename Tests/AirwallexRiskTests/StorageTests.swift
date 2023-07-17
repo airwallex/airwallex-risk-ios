@@ -13,23 +13,38 @@ final class StorageTests: XCTestCase {
     private static let key = "storage-test"
     private static let defaults = UserDefaults(suiteName: UUID().uuidString)
 
-    @Storage(key: StorageTests.key, defaultValue: .init(id: nil), defaults: StorageTests.defaults)
-    private var test: CodableMock
+    private var test: Storage<StorableMock>!
+
+    override func setUp() {
+        test = .init(
+            key: StorageTests.key,
+            defaults: StorageTests.defaults
+        )
+    }
 
     func testStorage() {
         let id = "Identifier"
-        XCTAssertNil(test.id)
+        XCTAssertNil(test.wrappedValue.id)
 
-        test = .init(id: id)
-        XCTAssertEqual(test.id, id)
+        test.wrappedValue = .init(id: id)
+        XCTAssertEqual(test.wrappedValue.id, id)
         let data = StorageTests.defaults?.object(forKey: Self.key) as! Data
         let first = try! JSONDecoder().decode(CodableMock.self, from: data)
-        XCTAssertEqual(test.id, first.id)
+        XCTAssertEqual(test.wrappedValue.id, first.id)
 
-        test = .init(id: nil)
-        XCTAssertNil(test.id)
+        test.wrappedValue = .init(id: nil)
+        XCTAssertNil(test.wrappedValue.id)
         let data2 = StorageTests.defaults?.object(forKey: Self.key) as! Data
         let second = try! JSONDecoder().decode(CodableMock.self, from: data2)
         XCTAssertNil(second.id)
+    }
+}
+
+// MOVE
+private struct StorableMock: Storable {
+    let id: String?
+
+    static func defaultValue() -> StorableMock {
+        .init(id: nil)
     }
 }

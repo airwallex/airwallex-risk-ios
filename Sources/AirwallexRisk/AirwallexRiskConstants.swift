@@ -27,6 +27,7 @@ enum AirwallexKey {
 
 enum AirwallexUserDefaultKey {
     static let deviceID = "com.airwallex:deviceID"
+    static let account = "com.airwallex:account"
     static let user = "com.airwallex:user"
     static let tenant = "com.airwallex:tenant"
 }

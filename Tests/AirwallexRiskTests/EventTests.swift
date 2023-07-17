@@ -21,7 +21,7 @@ final class EventTests: XCTestCase {
         }
         XCTAssertEqual(event.accountID, "accountID")
         XCTAssertNil(event.userID)
-        XCTAssertEqual(event.deviceID, context.deviceID)
+        XCTAssertEqual(event.deviceID, context.deviceID.wrappedValue)
         XCTAssertEqual(event.sessionID, context.sessionID)
         XCTAssertEqual(event.tenant, context.tenant)
         XCTAssertEqual(event.app, .init(app: context.dataCollector.app))

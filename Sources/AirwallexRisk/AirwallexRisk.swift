@@ -26,11 +26,22 @@ public class AirwallexRisk {
     var header: Header {
         .init(
             field: AirwallexKey.header,
-            value: context.deviceID.uuidString
+            value: context.deviceID.wrappedValue.uuidString
         )
     }
 
-    /// Stores the signed in Airwallex  user ID.
+    /// Sets the Airwallex  account ID.
+    ///
+    /// Use this method to update the account ID if it changes. 
+    /// - Parameters:
+    ///   - accountID: Airwallex account ID. Set `nil` on sign out.
+    func set(accountID: String?) {
+        context.update(
+            account: .init(id: accountID)
+        )
+    }
+
+    /// Sets the signed in Airwallex  user ID.
     ///
     /// Use this method after user sign in/out to store the user ID to be sent with events.
     /// - Parameters:

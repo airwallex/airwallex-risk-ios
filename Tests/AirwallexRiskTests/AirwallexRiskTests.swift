@@ -25,16 +25,26 @@ final class AirwallexRiskTests: XCTestCase {
 
     func testHeader() {
         XCTAssertEqual(airwallexRisk.header.field, AirwallexKey.header)
-        XCTAssertEqual(airwallexRisk.header.value, testContext.deviceID.uuidString)
+        XCTAssertEqual(airwallexRisk.header.value, testContext.deviceID.wrappedValue.uuidString)
+    }
+
+    func testSetAccountID() {
+        let id = "accountID2"
+        XCTAssertEqual(testContext.account.wrappedValue.id, "accountID")
+        airwallexRisk.set(accountID: id)
+        XCTAssertEqual(testContext.account.wrappedValue.id, "accountID2")
+        XCTAssertEqual(testContext.account.wrappedValue.id, id)
+        airwallexRisk.set(accountID: nil)
+        XCTAssertNil(testContext.account.wrappedValue.id)
     }
 
     func testSetUserID() {
         let id = "userID"
-        XCTAssertNil(testContext.user.id)
+        XCTAssertNil(testContext.user.wrappedValue.id)
         airwallexRisk.set(userID: id)
-        XCTAssertEqual(testContext.user.id, id)
+        XCTAssertEqual(testContext.user.wrappedValue.id, id)
         airwallexRisk.set(userID: nil)
-        XCTAssertNil(testContext.user.id)
+        XCTAssertNil(testContext.user.wrappedValue.id)
     }
 
     func testLogEvent() {

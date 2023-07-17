@@ -8,10 +8,16 @@
 
 import Foundation
 
-struct User: Codable {
+struct User {
     let id: String?
 
-    init(id: String? = nil) {
+    init(id: String?) {
         self.id = id
+    }
+}
+
+extension User: Storable {
+    static func defaultValue() -> User {
+        .init(id: nil)
     }
 }

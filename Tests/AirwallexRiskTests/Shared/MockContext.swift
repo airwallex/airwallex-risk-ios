@@ -10,9 +10,11 @@ import Foundation
 @testable import AirwallexRisk
 
 extension AirwallexRiskContext {
-    static func mock() -> AirwallexRiskContext {
+    static func mock(
+        accountID: String = "accountID"
+    ) -> AirwallexRiskContext {
         .init(
-            accountID: "accountID",
+            accountID: accountID,
             environment: .staging,
             tenant: .internal
         )

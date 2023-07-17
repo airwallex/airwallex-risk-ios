@@ -7,14 +7,14 @@
 
 import Foundation
 
-/// AirwallexRisk configuration. Can be passed in as a parameter of ``AirwallexRisk/AirwallexRisk/start(with:)`` to configure the SDK.
+/// AirwallexRisk configuration. Can be passed in as a parameter of ``AirwallexRisk/AirwallexRisk/start(accountID:with:)`` to configure the SDK.
 public struct AirwallexRiskConfiguration {
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
 
     /// AirwallexRisk configuration options.
     ///
-    /// Assigned when starting the SDK with ``AirwallexRisk/AirwallexRisk/start(with:)``.
+    /// Assigned when starting the SDK with ``AirwallexRisk/AirwallexRisk/start(accountID:with:)``.
     /// - Parameters:
     ///   - isProduction: Set to false for pre-production or test builds.
     ///   - tenant: Do not modify unless requested by Airwallex.

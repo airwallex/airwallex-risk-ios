@@ -9,9 +9,10 @@
 import Foundation
 
 extension AirwallexRisk {
+    /// Shared instance of ``AirwallexRisk``.
     private(set) static var shared: AirwallexRisk?
 
-    /// Starts the shared `AirwallexRisk` SDK instance.
+    /// Starts the shared ``AirwallexRisk`` SDK instance.
     ///
     /// - Parameters:
     ///   - accountID: Airwallex account ID for app customer. Required for all scale customers.
@@ -33,6 +34,19 @@ extension AirwallexRisk {
             ),
             eventManager: .init()
         )
+    }
+
+    /// Updates the  Airwallex  account ID in the shared instance.
+    ///
+    /// Use this method if the account ID changes after calling ``start(accountID:with:)``. This method is unneeded by most users.
+    /// - Parameters:
+    ///   - accountID: Airwallex account ID. Set `nil` if unavailable.
+    public static func set(accountID: String?) {
+        guard let shared else {
+            print(AirwallexValue.notStartedWarning)
+            return
+        }
+        shared.set(accountID: accountID)
     }
 
     /// Stores the signed in Airwallex  user ID in the shared instance.
