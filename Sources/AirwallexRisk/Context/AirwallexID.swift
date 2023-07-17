@@ -1,14 +1,14 @@
 //
-//  Account.swift
+//  AirwallexID.swift
 //  AirwallexRisk
 // 
-//  Created by Richie Shilton on 17/7/2023.
+//  Created by Richie Shilton on 6/7/2023.
 //  Copyright © 2023 Airwallex. All rights reserved.
 //
 
 import Foundation
 
-struct Account {
+struct AirwallexID {
     let id: String?
 
     init(id: String?) {
@@ -16,8 +16,8 @@ struct Account {
     }
 }
 
-extension Account: Storable {
-    static func defaultValue() -> Account {
+extension AirwallexID: Storable {
+    static func defaultValue() -> AirwallexID {
         .init(id: nil)
     }
 }

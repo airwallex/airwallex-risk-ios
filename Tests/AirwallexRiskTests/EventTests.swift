@@ -30,11 +30,14 @@ final class EventTests: XCTestCase {
 
     func testUserFromContext() {
         let context = AirwallexRiskContext(accountID: "accountID", environment: .production, tenant: .scale)
-        context.update(user: .init(id: "userID"))
+        context.update(userID: "userID")
         XCTAssertNotNil(Event.mock(context: context).accountID)
         XCTAssertNotNil(Event.mock(context: context).userID)
-        context.update(user: .init(id: nil))
+        context.update(userID: nil)
         XCTAssertEqual(Event.mock(context: context).accountID, "accountID")
+        XCTAssertNil(Event.mock(context: context).userID)
+        context.update(accountID: nil)
+        XCTAssertNil(Event.mock(context: context).accountID)
         XCTAssertNil(Event.mock(context: context).userID)
     }
 }

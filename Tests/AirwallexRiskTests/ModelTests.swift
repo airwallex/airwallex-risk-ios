@@ -10,14 +10,9 @@ import XCTest
 @testable import AirwallexRisk
 
 final class ModelTests: XCTestCase {
-    func testAccount() {
-        let defaultAccount = Account.defaultValue()
-        XCTAssertNil(defaultAccount.id)
-    }
-
-    func testUser() {
-        let defaultUser = User.defaultValue()
-        XCTAssertNil(defaultUser.id)
+    func testAirwallexID() {
+        let defaultAirwallexID = AirwallexID.defaultValue()
+        XCTAssertNil(defaultAirwallexID.id)
     }
 
     func testTenant() {

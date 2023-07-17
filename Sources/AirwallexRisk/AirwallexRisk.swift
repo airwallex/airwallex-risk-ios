@@ -36,9 +36,7 @@ public class AirwallexRisk {
     /// - Parameters:
     ///   - accountID: Airwallex account ID. Set `nil` on sign out.
     func set(accountID: String?) {
-        context.update(
-            account: .init(id: accountID)
-        )
+        context.update(accountID: accountID)
     }
 
     /// Sets the signed in Airwallex  user ID.
@@ -47,9 +45,7 @@ public class AirwallexRisk {
     /// - Parameters:
     ///   - userID: Signed in Airwallex user ID. Set `nil` on sign out.
     func set(userID: String?) {
-        context.update(
-            user: .init(id: userID)
-        )
+        context.update(userID: userID)
     }
 
     /// Adds a new event to the queue.

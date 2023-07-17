@@ -10,8 +10,8 @@ import Foundation
 
 class AirwallexRiskContext {
     private(set) var deviceID: Storage<UUID>
-    private(set) var account: Storage<Account>
-    private(set) var user: Storage<User>
+    private(set) var account: Storage<AirwallexID>
+    private(set) var user: Storage<AirwallexID>
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
     let sessionID: UUID
@@ -60,11 +60,11 @@ class AirwallexRiskContext {
         """
     }
 
-    func update(account: Account) {
-        self.account.wrappedValue = account
+    func update(accountID: String?) {
+        self.account.wrappedValue = .init(id: accountID)
     }
 
-    func update(user: User) {
-        self.user.wrappedValue = user
+    func update(userID: String?) {
+        self.user.wrappedValue = .init(id: userID)
     }
 }
