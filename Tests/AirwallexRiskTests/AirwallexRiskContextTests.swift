@@ -31,4 +31,16 @@ final class AirwallexRiskContextTests: XCTestCase {
         )
         XCTAssertEqual(initialSessionID, context.sessionID)
     }
+
+    func testIsFirstLaunch() {
+        let context = AirwallexRiskContext(
+            accountID: nil,
+            environment: .staging,
+            tenant: .internal,
+            defaults: .test
+        )
+        XCTAssertTrue(context.isFirstLaunch)
+        XCTAssertFalse(context.isFirstLaunch)
+        XCTAssertFalse(context.isFirstLaunch)
+    }
 }

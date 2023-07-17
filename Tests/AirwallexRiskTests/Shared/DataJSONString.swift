@@ -12,7 +12,7 @@ extension Data {
         case serialisation
     }
 
-    // Test helper to test json encoding.
+    // Helper to test json encoding.
     var jsonString: String {
         get throws {
             guard let object = try? JSONSerialization.jsonObject(with: self, options: []),

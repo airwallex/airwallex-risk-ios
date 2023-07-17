@@ -16,6 +16,7 @@ class AirwallexRiskContext {
     let tenant: Tenant
     let sessionID: UUID
     let dataCollector: DataCollector
+    let defaults: UserDefaults?
 
     init(
         accountID: String?,
@@ -45,6 +46,7 @@ class AirwallexRiskContext {
             app: .init(),
             device: .init()
         )
+        self.defaults = defaults
 
         print("+++ Context +++\n\(description)\n")
     }
@@ -58,6 +60,15 @@ class AirwallexRiskContext {
         DeviceID: \(deviceID)
         SessionID: \(sessionID)
         """
+    }
+
+    var isFirstLaunch: Bool {
+        let key = AirwallexUserDefaultKey.hasLaunched
+        if let defaults, !defaults.bool(forKey: key) {
+            defaults.set(true, forKey: key)
+            return true
+        }
+        return false
     }
 
     func update(accountID: String?) {

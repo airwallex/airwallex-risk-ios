@@ -11,7 +11,7 @@ import XCTest
 
 final class StorageTests: XCTestCase {
     private static let key = "storage-test"
-    private static let defaults = UserDefaults(suiteName: UUID().uuidString)
+    private static let defaults: UserDefaults? = .test
 
     private var test: Storage<StorableMock>!
 

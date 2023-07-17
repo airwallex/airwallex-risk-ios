@@ -12,8 +12,8 @@ import XCTest
 final class HeaderTests: XCTestCase {
     override func setUp() {
         super.setUp()
+        UserDefaults.clearSDKUserDefaults()
         AirwallexRisk.start(accountID: "accountID")
-        UserDefaults.sdk?.removeObject(forKey: AirwallexUserDefaultKey.deviceID)
     }
 
     func testSetAirwallexHeader() {
