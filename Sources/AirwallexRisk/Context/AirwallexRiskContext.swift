@@ -31,7 +31,9 @@ class AirwallexRiskContext {
             key: AirwallexUserDefaultKey.account,
             defaults: defaults
         )
-        self.account.wrappedValue = .init(id: accountID)
+        if let accountID {
+            self.account.wrappedValue = .init(id: accountID)
+        }
         self.user = .init(
             key: AirwallexUserDefaultKey.user,
             defaults: defaults
