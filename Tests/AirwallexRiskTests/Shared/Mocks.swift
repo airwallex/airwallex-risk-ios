@@ -39,21 +39,10 @@ class MockClient: ClientType {
 
 class MockEventScheduler: EventSchedulerType {
     var isRunning = false
-    var didFire = false
 
     func scheduleRepeating(block: @escaping () async -> Void) {
         isRunning = true
     }
-
-    func fire() {
-        didFire = true
-    }
-
-    func stop() {
-        isRunning = false
-    }
-
-
 }
 
 class MockAutomaticEventProvider: AutomaticEventProviderType {

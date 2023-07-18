@@ -24,32 +24,4 @@ final class EventSchedulerTests: XCTestCase {
         }
         waitForExpectations(timeout: 0.2)
     }
-
-    func testFire() {
-        let exp = expectation(description: "Should run the block on timer")
-        var hasRun = false
-        let block = { hasRun = true }
-        let scheduler = EventScheduler(timeInterval: 10)
-        XCTAssertFalse(hasRun)
-        scheduler.scheduleRepeating(block: block)
-        XCTAssertFalse(hasRun)
-        scheduler.fire()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            XCTAssertTrue(hasRun)
-            exp.fulfill()
-        }
-        waitForExpectations(timeout: 0.2)
-    }
-
-    func testStop() {
-        var hasRun = false
-        let block = { hasRun = true }
-        let scheduler = EventScheduler(timeInterval: 10)
-        XCTAssertFalse(hasRun)
-        scheduler.scheduleRepeating(block: block)
-        XCTAssertFalse(hasRun)
-        scheduler.stop()
-        scheduler.fire()
-        XCTAssertFalse(hasRun)
-    }
 }

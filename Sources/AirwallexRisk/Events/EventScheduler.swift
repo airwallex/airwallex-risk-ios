@@ -10,8 +10,6 @@ import Foundation
 
 protocol EventSchedulerType {
     func scheduleRepeating(block: @escaping () async -> Void)
-    func fire()
-    func stop()
 }
 
 class EventScheduler: EventSchedulerType {
@@ -28,14 +26,10 @@ class EventScheduler: EventSchedulerType {
         }
         RunLoop.current.add(timer, forMode: .common)
         self.timer = timer
-        self.timer?.fire()
+        self.fire()
     }
 
-    func fire() {
+    private func fire() {
         timer?.fire()
-    }
-
-    func stop() {
-        timer?.invalidate()
     }
 }
