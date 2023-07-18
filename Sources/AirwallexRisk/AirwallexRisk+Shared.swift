@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  AirwallexRisk+Shared.swift
 //  AirwallexRisk
 // 
 //  Created by Richie Shilton on 14/7/2023.
@@ -26,13 +26,14 @@ extension AirwallexRisk {
             print("AirwallexRisk has already started.")
             return
         }
+        let context = AirwallexRiskContext.init(
+            accountID: accountID,
+            environment: configuration.environment,
+            tenant: configuration.tenant
+        )
         shared = .init(
-            context: .init(
-                accountID: accountID,
-                environment: configuration.environment,
-                tenant: configuration.tenant
-            ),
-            eventManager: .init()
+            context: context,
+            eventManager: .init(context: context)
         )
     }
 

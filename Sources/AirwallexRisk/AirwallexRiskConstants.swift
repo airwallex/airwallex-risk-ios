@@ -15,6 +15,10 @@ enum AirwallexValue {
     static let contentJSON = "application/json"
     static let scheme = "https"
     static let notStartedWarning = "Please call `AirwallexRisk.start()` on app launch."
+
+    static func timeInterval(context: AirwallexRiskContext) -> TimeInterval {
+        context.environment == .production ? 20 : 5
+    }
 }
 
 enum AirwallexKey {

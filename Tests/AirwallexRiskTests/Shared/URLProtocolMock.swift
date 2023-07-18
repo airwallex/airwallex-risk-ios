@@ -11,7 +11,6 @@ import Foundation
 typealias Response = (Data?, URLResponse?, Error?)
 
 class URLProtocolMock: URLProtocol {
-
     static var testURLs = [URL?: Response]()
 
     override class func canInit(with request: URLRequest) -> Bool {
@@ -23,7 +22,6 @@ class URLProtocolMock: URLProtocol {
     }
 
     override func startLoading() {
-
         if let url = request.url {
             if let data = URLProtocolMock.testURLs[url]?.0 {
                 self.client?.urlProtocol(self, didLoad: data)
@@ -37,7 +35,6 @@ class URLProtocolMock: URLProtocol {
                 self.client?.urlProtocol(self, didFailWithError: error)
             }
         }
-
         self.client?.urlProtocolDidFinishLoading(self)
     }
 

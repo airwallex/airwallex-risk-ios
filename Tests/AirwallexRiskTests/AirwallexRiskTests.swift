@@ -10,13 +10,17 @@ import XCTest
 @testable import AirwallexRisk
 
 final class AirwallexRiskTests: XCTestCase {
+    private var repository: EventRepository!
     private var testContext: AirwallexRiskContext!
     private var testEventManager: EventManager!
     private var airwallexRisk: AirwallexRisk!
 
     override func setUp() {
+        repository = .init()
         testContext = .mock()
-        testEventManager = .mock()
+        testEventManager = .mock(
+            repository: repository
+        )
         airwallexRisk = AirwallexRisk(
             context: testContext,
             eventManager: testEventManager
@@ -48,9 +52,9 @@ final class AirwallexRiskTests: XCTestCase {
     }
 
     func testLogEvent() {
-        XCTAssertTrue(testEventManager.repository.events.isEmpty)
+        XCTAssertTrue(repository.get().isEmpty)
         airwallexRisk.log(event: "login")
-        XCTAssertEqual(testEventManager.repository.events.count, 1)
-        XCTAssertEqual(testEventManager.repository.events.first?.type, .custom(event: "login"))
+        XCTAssertEqual(repository.get().count, 1)
+        XCTAssertEqual(repository.get().first?.type, .custom(event: "login"))
     }
 }

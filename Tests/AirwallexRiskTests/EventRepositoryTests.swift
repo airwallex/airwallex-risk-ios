@@ -12,24 +12,23 @@ import XCTest
 final class EventRepositoryTests: XCTestCase {
     func testAdd() {
         let repo = EventRepository()
-        XCTAssertTrue(repo.events.isEmpty)
-        repo.add(event: .mock())
-        XCTAssertEqual(repo.events.count, 1)
-        repo.add(event: .mock())
-        XCTAssertEqual(repo.events.count, 2)
+        XCTAssertTrue(repo.get().isEmpty)
+        repo.add(.mock())
+        XCTAssertEqual(repo.get().count, 1)
+        repo.add(.mock())
+        XCTAssertEqual(repo.get().count, 2)
     }
 
-    func testRemove() {
+    func testPopAll() {
         let repo = EventRepository()
-        XCTAssertTrue(repo.events.isEmpty)
+        XCTAssertTrue(repo.get().isEmpty)
         let mock = Event.mock()
-        repo.add(event: mock)
-        repo.add(event: .mock())
-        repo.add(event: .mock())
-        XCTAssertEqual(repo.events.count, 3)
-        repo.remove(event: mock)
-        XCTAssertEqual(repo.events.count, 2)
-        repo.removeAll()
-        XCTAssertTrue(repo.events.isEmpty)
+        repo.add(mock)
+        repo.add([.mock(), .mock()])
+        XCTAssertEqual(repo.get().count, 3)
+        let events = repo.popAll()
+        XCTAssertEqual(events?.count, 3)
+        XCTAssertTrue(repo.get().isEmpty)
+        XCTAssertNil(repo.popAll())
     }
 }

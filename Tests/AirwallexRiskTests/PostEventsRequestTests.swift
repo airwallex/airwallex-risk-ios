@@ -1,5 +1,5 @@
 //
-//  EventRequestTests.swift
+//  PostEventsRequestTests.swift
 //  AirwallexRisk
 // 
 //  Created by Richie Shilton on 17/7/2023.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import AirwallexRisk
 
-final class EventRequestTests: XCTestCase {
+final class PostEventsRequestTests: XCTestCase {
     private var testContext: AirwallexRiskContext!
 
     override func setUp() {
@@ -17,7 +17,7 @@ final class EventRequestTests: XCTestCase {
     }
 
     func testInit() throws {
-        let request = EventRequest(events: [.init(type: .custom(event: "login"), context: testContext)], context: testContext)
+        let request = PostEventsRequest(events: [.init(type: .custom(event: "login"), context: testContext)], context: testContext)
         let urlRequest: URLRequest = try .init(request: request)
         XCTAssertEqual(urlRequest.url?.absoluteString, "https://staging.airwallex.com/bws/v2/m/\(testContext.sessionID)")
     }

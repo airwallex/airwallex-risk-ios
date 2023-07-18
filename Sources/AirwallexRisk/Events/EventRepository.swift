@@ -9,21 +9,26 @@
 import Foundation
 
 class EventRepository {
-    private(set) var events: [Event] = .init()
+    private var events: [Event] = .init()
 
-    func add(event: Event) {
-        events.append(event)
+    func add(_ event: Event) {
+        self.events.append(event)
     }
 
-    func remove(event: Event) {
-        remove(event: event.eventID)
+    func add(_ events: [Event]) {
+        self.events.insert(contentsOf: events, at: .zero)
     }
 
-    func remove(event id: UUID) {
-        events.removeAll(where: { $0.eventID == id })
+    func get() -> [Event] {
+        events
+    }
+
+    func popAll() -> [Event]? {
+        defer { removeAll() }
+        return events.isEmpty ? nil : events
     }
 
     func removeAll() {
-        events = .init()
+        self.events = .init()
     }
 }

@@ -11,6 +11,7 @@ import XCTest
 
 final class NetworkTests: XCTestCase {
     private let body = CodableMock(id: "id")
+    private let url = URL(string: "https://www.airwallex.com/path")!
 
     override func setUp() {
         super.setUp()
@@ -49,14 +50,14 @@ final class NetworkTests: XCTestCase {
 
     func testExecuteSuccess() async throws {
         let id = "Success"
-        let session = URLSession.successMock(encodable: CodableMock(id: id))
+        let session = URLSession.successMock(url: url, encodable: CodableMock(id: id))
         let mockRequest = MockHTTPRequest()
         let response: CodableMock = try await session.execute(request: mockRequest)
         XCTAssertEqual(response.id, id)
     }
 
     func testExecuteFailure() async throws {
-        let session = URLSession.errorMock(errorCode: 500)
+        let session = URLSession.errorMock(url: url, errorCode: 500)
         let mockRequest = MockHTTPRequest()
         do {
             let _: CodableMock = try await session.execute(request: mockRequest)
@@ -83,26 +84,5 @@ private struct MockHTTPRequest: HTTPRequestType {
     ) {
         self.path = path
         self.method = method
-    }
-}
-
-private extension URLSession {
-    static func successMock<T: Encodable>(encodable: T) -> URLSession {
-        let url = URL(string: "https://www.airwallex.com/path")!
-        let data = try! JSONEncoder().encode(encodable)
-        let response: Response = (data, HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil), nil)
-        URLProtocolMock.testURLs = [url: response]
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [URLProtocolMock.self]
-        return URLSession(configuration: config)
-    }
-
-    static func errorMock(errorCode: Int) -> URLSession {
-        let url = URL(string: "https://www.airwallex.com/path")!
-        let response: Response = (nil, HTTPURLResponse(url: url, statusCode: errorCode, httpVersion: nil, headerFields: nil), nil)
-        URLProtocolMock.testURLs = [url: response]
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [URLProtocolMock.self]
-        return URLSession(configuration: config)
     }
 }

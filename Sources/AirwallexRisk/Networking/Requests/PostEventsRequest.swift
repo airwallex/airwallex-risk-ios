@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  PostEventsRequest.swift
 //  AirwallexRisk
 // 
 //  Created by Richie Shilton on 17/7/2023.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct EventRequest: HTTPRequestType {
+struct PostEventsRequest: HTTPRequestType {
     var host: String
     var path: String
     var method: HTTPRequestMethod

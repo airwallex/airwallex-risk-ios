@@ -22,7 +22,7 @@ public struct AirwallexRiskConfiguration {
         isProduction: Bool = true,
         tenant: Tenant = .scale
     ) {
-        self.environment = isProduction ? .production : .demo
+        self.environment = isProduction ? .production : .staging
         self.tenant = tenant
     }
 }
