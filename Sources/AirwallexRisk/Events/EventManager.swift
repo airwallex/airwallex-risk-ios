@@ -8,31 +8,51 @@
 
 import Foundation
 
-class EventManager {
-    private let repository: EventRepository
-    private let client: AirwallexRiskClient
-    private let eventScheduler: EventScheduler
-    private let automaticEventProvider: AutomaticEventProvider
+protocol EventManagerType {
+    func queue(event: Event)
+    func sendEvents() async
+    func scheduleEvents()
+}
 
-    init(
+class EventManager: EventManagerType {
+    private let repository: any RepositoryType<Event>
+    private let client: ClientType
+    private let eventScheduler: EventSchedulerType
+    private let automaticEventProvider: AutomaticEventProviderType
+
+    convenience init(
         context: AirwallexRiskContext,
-        repository: EventRepository = .init(),
+        repository: any RepositoryType<Event> = EventRepository(),
         session: URLSession = .shared
     ) {
-        self.repository = repository
-        self.client = .init(
-            session: session,
-            context: context
-        )
-        self.eventScheduler = .init(
-            timeInterval: AirwallexValue.timeInterval(context: context)
-        )
-        self.automaticEventProvider = .init(
+        self.init(
             repository: repository,
-            context: context
+            client: AirwallexRiskClient(
+                session: session,
+                context: context
+            ),
+            eventScheduler: EventScheduler(
+                timeInterval: AirwallexValue.timeInterval(context: context)
+            ),
+            automaticEventProvider: AutomaticEventProvider(
+                repository: repository,
+                context: context
+            )
         )
-
+        self.automaticEventProvider.openEvent()
         self.scheduleEvents()
+    }
+
+    init(
+        repository: any RepositoryType<Event>,
+        client: ClientType,
+        eventScheduler: EventSchedulerType,
+        automaticEventProvider: AutomaticEventProviderType
+    ) {
+        self.repository = repository
+        self.client = client
+        self.eventScheduler = eventScheduler
+        self.automaticEventProvider = automaticEventProvider
     }
 
     func queue(event: Event) {
@@ -51,7 +71,7 @@ class EventManager {
         }
     }
 
-    private func scheduleEvents() {
+    func scheduleEvents() {
         eventScheduler.scheduleRepeating(block: sendEvents)
     }
 }

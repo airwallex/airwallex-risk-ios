@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EventRepository {
+class EventRepository: RepositoryType {
     private var events: [Event] = .init()
 
     func add(_ event: Event) {
@@ -28,7 +28,7 @@ class EventRepository {
         return events.isEmpty ? nil : events
     }
 
-    func removeAll() {
+    private func removeAll() {
         self.events = .init()
     }
 }

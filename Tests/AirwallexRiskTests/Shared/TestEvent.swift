@@ -1,5 +1,5 @@
 //
-//  MockEvent.swift
+//  TestEvent.swift
 //  AirwallexRisk
 // 
 //  Created by Richie Shilton on 12/7/2023.
@@ -10,7 +10,7 @@ import Foundation
 @testable import AirwallexRisk
 
 extension Event {
-    static func mock(
+    static func test(
         eventID: UUID = .init(),
         context: AirwallexRiskContext = .init(accountID: "accountID", environment: .production, tenant: .scale),
         createdAtUTC: Date = .init()

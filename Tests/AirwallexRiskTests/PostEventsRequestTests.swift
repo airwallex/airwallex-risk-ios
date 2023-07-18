@@ -13,7 +13,7 @@ final class PostEventsRequestTests: XCTestCase {
     private var testContext: AirwallexRiskContext!
 
     override func setUp() {
-        testContext = .mock()
+        testContext = .test()
     }
 
     func testInit() throws {

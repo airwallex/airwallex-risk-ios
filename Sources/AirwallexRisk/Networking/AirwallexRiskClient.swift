@@ -8,9 +8,14 @@
 
 import Foundation
 
-class AirwallexRiskClient {
-    let session: URLSession
-    let context: AirwallexRiskContext
+protocol ClientType {
+    @discardableResult
+    func log(events: [Event]) async throws -> PostEventsResponse
+}
+
+class AirwallexRiskClient: ClientType {
+    private let session: URLSession
+    private let context: AirwallexRiskContext
 
     init(
         session: URLSession,

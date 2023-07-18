@@ -8,7 +8,13 @@
 
 import Foundation
 
-class EventScheduler {
+protocol EventSchedulerType {
+    func scheduleRepeating(block: @escaping () async -> Void)
+    func fire()
+    func stop()
+}
+
+class EventScheduler: EventSchedulerType {
     private let timeInterval: TimeInterval
     private var timer: Timer?
 

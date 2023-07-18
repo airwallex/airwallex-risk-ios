@@ -7,21 +7,23 @@
 
 import Foundation
 
-class AutomaticEventProvider {
-    private let repository: EventRepository
+protocol AutomaticEventProviderType {
+    func openEvent()
+}
+
+class AutomaticEventProvider: AutomaticEventProviderType {
+    private let repository: any RepositoryType<Event>
     private let context: AirwallexRiskContext
 
     init(
-        repository: EventRepository,
+        repository: any RepositoryType<Event>,
         context: AirwallexRiskContext
     ) {
         self.repository = repository
         self.context = context
-
-        self.onStart()
     }
 
-    private func onStart() {
+    func openEvent() {
         let type: EventType.SDKEvent = context.shouldSendInstallationEvent ? .installation : .open
         queue(.automatic(event: type))
     }

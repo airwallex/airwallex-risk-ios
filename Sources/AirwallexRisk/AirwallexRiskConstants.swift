@@ -34,7 +34,7 @@ enum AirwallexUserDefaultKey {
     static let account = "com.airwallex:account"
     static let user = "com.airwallex:user"
     static let tenant = "com.airwallex:tenant"
-    static let hasSentInstallationEvent = "com.airwallex:hasSentInstallationEvent"
+    static let installationEvent = "com.airwallex:installevent"
 }
 
 enum AirwallexHost {

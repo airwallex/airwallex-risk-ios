@@ -13,7 +13,7 @@ final class EventTests: XCTestCase {
     func testInitFromContext() {
         let eventID = UUID()
         let context = AirwallexRiskContext(accountID: "accountID", environment: .production, tenant: .scale)
-        let event = Event.mock(eventID: eventID, context: context)
+        let event = Event.test(eventID: eventID, context: context)
         XCTAssertEqual(event.eventID, eventID)
         switch event.type {
         case .automatic(.open): break
@@ -31,13 +31,13 @@ final class EventTests: XCTestCase {
     func testUserFromContext() {
         let context = AirwallexRiskContext(accountID: "accountID", environment: .production, tenant: .scale)
         context.update(userID: "userID")
-        XCTAssertNotNil(Event.mock(context: context).accountID)
-        XCTAssertNotNil(Event.mock(context: context).userID)
+        XCTAssertNotNil(Event.test(context: context).accountID)
+        XCTAssertNotNil(Event.test(context: context).userID)
         context.update(userID: nil)
-        XCTAssertEqual(Event.mock(context: context).accountID, "accountID")
-        XCTAssertNil(Event.mock(context: context).userID)
+        XCTAssertEqual(Event.test(context: context).accountID, "accountID")
+        XCTAssertNil(Event.test(context: context).userID)
         context.update(accountID: nil)
-        XCTAssertNil(Event.mock(context: context).accountID)
-        XCTAssertNil(Event.mock(context: context).userID)
+        XCTAssertNil(Event.test(context: context).accountID)
+        XCTAssertNil(Event.test(context: context).userID)
     }
 }

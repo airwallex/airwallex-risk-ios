@@ -10,11 +10,11 @@ import Foundation
 
 public class AirwallexRisk {
     private let context: AirwallexRiskContext
-    private let eventManager: EventManager
+    private let eventManager: EventManagerType
 
     init(
         context: AirwallexRiskContext,
-        eventManager: EventManager
+        eventManager: EventManagerType
     ) {
         self.context = context
         self.eventManager = eventManager

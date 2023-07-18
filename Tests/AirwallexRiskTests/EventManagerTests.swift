@@ -10,43 +10,78 @@ import XCTest
 @testable import AirwallexRisk
 
 final class EventManagerTests: XCTestCase {
-    var manager: EventManager!
-    var isSuccess = false
-
-    func testSendEventsSuccess() async {
-        let context = AirwallexRiskContext.mock()
-        let url = URL(string: "https://staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
-        let session = URLSession.successMock(url: url, encodable: PostEventsResponse(message: "Success"))
+    func testQueueEvent() {
         let repository = EventRepository()
-        manager = EventManager(context: context, repository: repository, session: session)
+        let eventManager = EventManager.manager(
+            repository: repository
+        )
+        XCTAssertTrue(repository.get().isEmpty)
+        eventManager.queue(event: .test())
         XCTAssertEqual(repository.get().count, 1)
-        manager.queue(event: .init(type: .custom(event: "login"), context: context))
-        XCTAssertEqual(repository.get().count, 2)
-        await manager.sendEvents()
-        XCTAssertEqual(repository.get().count, 0)
     }
 
-    func testSendEventsError() async {
-        let context = AirwallexRiskContext.mock()
-        let url = URL(string: "https://staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
-        let session = URLSession.errorMock(url: url, errorCode: 400)
+    func testSendEventSuccess() async {
         let repository = EventRepository()
-        manager = EventManager(context: context, repository: repository, session: session)
+        let client = MockClient()
+        client.response = .init(message: "OK")
+        let eventManager = EventManager.manager(
+            repository: repository,
+            client: client
+        )
+        eventManager.queue(event: .test())
         XCTAssertEqual(repository.get().count, 1)
-        manager.queue(event: .init(type: .custom(event: "login"), context: context))
-        XCTAssertEqual(repository.get().count, 2)
-        await manager.sendEvents()
-        XCTAssertEqual(repository.get().count, 2)
+        await eventManager.sendEvents()
+        XCTAssertTrue(repository.get().isEmpty)
     }
 
-    func testNoEvents() async {
-        let context = AirwallexRiskContext.mock()
-        let url = URL(string: "https://staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
-        let session = URLSession.successMock(url: url, encodable: PostEventsResponse(message: "Success"))
+    func testSendEventFailure() async {
         let repository = EventRepository()
-        manager = EventManager(context: context, repository: repository, session: session)
+        let client = MockClient()
+        let eventManager = EventManager.manager(
+            repository: repository,
+            client: client
+        )
+        eventManager.queue(event: .test())
         XCTAssertEqual(repository.get().count, 1)
-        await manager.sendEvents()
-        XCTAssertEqual(repository.get().count, .zero)
+        await eventManager.sendEvents()
+        XCTAssertEqual(repository.get().count, 1)
+    }
+
+    func testSendNoEvent() async {
+        let repository = EventRepository()
+        let client = MockClient()
+        let eventManager = EventManager.manager(
+            repository: repository,
+            client: client
+        )
+        XCTAssertTrue(repository.get().isEmpty)
+        await eventManager.sendEvents()
+        XCTAssertTrue(repository.get().isEmpty)
+    }
+
+    func testSchedule() {
+        let scheduler = MockEventScheduler()
+        let eventManager = EventManager.manager(
+            eventScheduler: scheduler
+        )
+        XCTAssertFalse(scheduler.isRunning)
+        eventManager.scheduleEvents()
+        XCTAssertTrue(scheduler.isRunning)
+    }
+}
+
+private extension EventManager {
+    static func manager(
+        repository: any RepositoryType<Event> = EventRepository(),
+        client: ClientType = MockClient(),
+        eventScheduler: EventSchedulerType = MockEventScheduler(),
+        automaticEventProvider: AutomaticEventProviderType = MockAutomaticEventProvider()
+    ) -> EventManager {
+        EventManager(
+            repository: repository,
+            client: client,
+            eventScheduler: eventScheduler,
+            automaticEventProvider: automaticEventProvider
+        )
     }
 }

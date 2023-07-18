@@ -13,18 +13,18 @@ final class EventRepositoryTests: XCTestCase {
     func testAdd() {
         let repo = EventRepository()
         XCTAssertTrue(repo.get().isEmpty)
-        repo.add(.mock())
+        repo.add(.test())
         XCTAssertEqual(repo.get().count, 1)
-        repo.add(.mock())
+        repo.add(.test())
         XCTAssertEqual(repo.get().count, 2)
     }
 
     func testPopAll() {
         let repo = EventRepository()
         XCTAssertTrue(repo.get().isEmpty)
-        let mock = Event.mock()
+        let mock = Event.test()
         repo.add(mock)
-        repo.add([.mock(), .mock()])
+        repo.add([.test(), .test()])
         XCTAssertEqual(repo.get().count, 3)
         let events = repo.popAll()
         XCTAssertEqual(events?.count, 3)

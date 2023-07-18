@@ -33,7 +33,7 @@ extension AirwallexRisk {
         )
         shared = .init(
             context: context,
-            eventManager: .init(context: context)
+            eventManager: EventManager(context: context)
         )
     }
 
