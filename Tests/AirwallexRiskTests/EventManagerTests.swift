@@ -19,9 +19,9 @@ final class EventManagerTests: XCTestCase {
         let session = URLSession.successMock(url: url, encodable: PostEventsResponse(message: "Success"))
         let repository = EventRepository()
         manager = EventManager(context: context, repository: repository, session: session)
-        XCTAssertEqual(repository.get().count, .zero)
-        manager.queue(event: .init(type: .custom(event: "login"), context: context))
         XCTAssertEqual(repository.get().count, 1)
+        manager.queue(event: .init(type: .custom(event: "login"), context: context))
+        XCTAssertEqual(repository.get().count, 2)
         await manager.sendEvents()
         XCTAssertEqual(repository.get().count, 0)
     }
@@ -32,11 +32,11 @@ final class EventManagerTests: XCTestCase {
         let session = URLSession.errorMock(url: url, errorCode: 400)
         let repository = EventRepository()
         manager = EventManager(context: context, repository: repository, session: session)
-        XCTAssertEqual(repository.get().count, .zero)
+        XCTAssertEqual(repository.get().count, 1)
         manager.queue(event: .init(type: .custom(event: "login"), context: context))
-        XCTAssertEqual(repository.get().count, 1)
+        XCTAssertEqual(repository.get().count, 2)
         await manager.sendEvents()
-        XCTAssertEqual(repository.get().count, 1)
+        XCTAssertEqual(repository.get().count, 2)
     }
 
     func testNoEvents() async {
@@ -45,7 +45,7 @@ final class EventManagerTests: XCTestCase {
         let session = URLSession.successMock(url: url, encodable: PostEventsResponse(message: "Success"))
         let repository = EventRepository()
         manager = EventManager(context: context, repository: repository, session: session)
-        XCTAssertEqual(repository.get().count, .zero)
+        XCTAssertEqual(repository.get().count, 1)
         await manager.sendEvents()
         XCTAssertEqual(repository.get().count, .zero)
     }

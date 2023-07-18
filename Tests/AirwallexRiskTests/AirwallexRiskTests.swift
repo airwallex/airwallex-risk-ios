@@ -52,9 +52,9 @@ final class AirwallexRiskTests: XCTestCase {
     }
 
     func testLogEvent() {
-        XCTAssertTrue(repository.get().isEmpty)
-        airwallexRisk.log(event: "login")
         XCTAssertEqual(repository.get().count, 1)
-        XCTAssertEqual(repository.get().first?.type, .custom(event: "login"))
+        airwallexRisk.log(event: "login")
+        XCTAssertEqual(repository.get().count, 2)
+        XCTAssertEqual(repository.get().last?.type, .custom(event: "login"))
     }
 }

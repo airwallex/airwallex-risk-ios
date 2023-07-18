@@ -39,8 +39,8 @@ final class AirwallexRiskContextTests: XCTestCase {
             tenant: .internal,
             defaults: .test
         )
-        XCTAssertTrue(context.isFirstLaunch)
-        XCTAssertFalse(context.isFirstLaunch)
-        XCTAssertFalse(context.isFirstLaunch)
+        XCTAssertTrue(context.shouldSendInstallationEvent)
+        XCTAssertFalse(context.shouldSendInstallationEvent)
+        XCTAssertFalse(context.shouldSendInstallationEvent)
     }
 }

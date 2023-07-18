@@ -12,6 +12,7 @@ class EventManager {
     private let repository: EventRepository
     private let client: AirwallexRiskClient
     private let eventScheduler: EventScheduler
+    private let automaticEventProvider: AutomaticEventProvider
 
     init(
         context: AirwallexRiskContext,
@@ -23,10 +24,15 @@ class EventManager {
             session: session,
             context: context
         )
-        self.eventScheduler = .init(timeInterval: AirwallexValue.timeInterval(context: context))
+        self.eventScheduler = .init(
+            timeInterval: AirwallexValue.timeInterval(context: context)
+        )
+        self.automaticEventProvider = .init(
+            repository: repository,
+            context: context
+        )
 
         self.scheduleEvents()
-
     }
 
     func queue(event: Event) {

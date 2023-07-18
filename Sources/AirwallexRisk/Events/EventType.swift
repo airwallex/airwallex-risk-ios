@@ -11,7 +11,7 @@ import Foundation
 /// App lifecycle event types. Split into public app events, and events automatically logged by the SDK.
 enum EventType: Equatable {
     enum SDKEvent: String, Codable {
-        case firstLaunch
+        case installation
         case open
     }
 

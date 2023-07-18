@@ -62,8 +62,8 @@ class AirwallexRiskContext {
         """
     }
 
-    var isFirstLaunch: Bool {
-        let key = AirwallexUserDefaultKey.hasLaunched
+    var shouldSendInstallationEvent: Bool {
+        let key = AirwallexUserDefaultKey.hasSentInstallationEvent
         if let defaults, !defaults.bool(forKey: key) {
             defaults.set(true, forKey: key)
             return true
