@@ -94,9 +94,4 @@ extension AirwallexRisk {
         }
         return shared.header
     }
-
-    /// Stops the `AirwallexRisk` SDK.
-    static func stop() {
-        shared = nil
-    }
 }

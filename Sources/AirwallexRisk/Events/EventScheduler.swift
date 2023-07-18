@@ -26,8 +26,9 @@ class EventScheduler: EventSchedulerType {
         let timer = Timer(timeInterval: timeInterval, repeats: true) { _ in
             Task { await block() }
         }
-        self.timer = timer
         RunLoop.current.add(timer, forMode: .common)
+        self.timer = timer
+        self.timer?.fire()
     }
 
     func fire() {

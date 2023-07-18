@@ -13,32 +13,19 @@ final class HeaderTests: XCTestCase {
     override func setUp() {
         super.setUp()
         UserDefaults.clearSDKUserDefaults()
-        AirwallexRisk.start(accountID: "accountID")
     }
 
-    func testSetAirwallexHeader() {
-        var request = URLRequest(url: URL(string: "https://www.airwallex.com")!)
-        XCTAssertNil(request.value(forHTTPHeaderField: AirwallexKey.header))
-        request.setAirwallexHeader()
-        XCTAssertNotNil(request.value(forHTTPHeaderField: AirwallexKey.header))
-    }
-
-    func testSetAirwallexHeaderNotStarted() {
-        AirwallexRisk.stop()
-        var request = URLRequest(url: URL(string: "https://www.airwallex.com")!)
-        XCTAssertNil(request.value(forHTTPHeaderField: AirwallexKey.header))
-        request.setAirwallexHeader()
-        XCTAssertNil(request.value(forHTTPHeaderField: AirwallexKey.header))
+    func testSharedAirwallexHeaderNotStarted() {
+        XCTAssertNil(AirwallexRisk.header)
     }
 
     func testManualHeader() throws {
-        let header = try XCTUnwrap(AirwallexRisk.header)
-        XCTAssertEqual(header.field, AirwallexKey.header)
-        XCTAssertNotNil(header.value)
-    }
-
-    func testNoHeaderWhenStopped() {
-        AirwallexRisk.stop()
-        XCTAssertNil(AirwallexRisk.header)
+        let context = AirwallexRiskContext.test()
+        let risk = AirwallexRisk(
+            context: context,
+            eventManager: MockEventManager()
+        )
+        XCTAssertEqual(risk.header.field, AirwallexKey.header)
+        XCTAssertEqual(risk.header.value, context.deviceID.wrappedValue.uuidString)
     }
 }

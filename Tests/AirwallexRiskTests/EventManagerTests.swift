@@ -68,6 +68,18 @@ final class EventManagerTests: XCTestCase {
         eventManager.scheduleEvents()
         XCTAssertTrue(scheduler.isRunning)
     }
+
+    func testConvenienceInit() async {
+        let context = AirwallexRiskContext.test()
+        let repository = EventRepository()
+        let manager = EventManager.manager(
+            context: context,
+            repository: repository
+        )
+        XCTAssertEqual(repository.get().count, 1, "should start with open event")
+        await manager.sendEvents()
+        XCTAssertEqual(repository.get().count, .zero)
+    }
 }
 
 private extension EventManager {
@@ -84,4 +96,17 @@ private extension EventManager {
             automaticEventProvider: automaticEventProvider
         )
     }
+
+    static func manager(
+        context: AirwallexRiskContext,
+        repository: any RepositoryType<Event> = EventRepository(),
+        session: URLSession? = nil) -> EventManager {
+            let url = URL(string: "https://staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
+            let session = session ?? .successMock(url: url, encodable: PostEventsResponse(message: "Success"))
+            return .init(
+                context: context,
+                repository: repository,
+                session: session
+            )
+        }
 }
