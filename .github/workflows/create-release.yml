@@ -35,15 +35,15 @@ jobs:
         run: |
           echo "VERSION=${{ inputs.version || steps.semantic.outputs.new_release_version }}" >> $GITHUB_ENV
 
-      - name: Update versions
-        run: ./.github/scripts/update-versions.sh
+      - name: Update version
+        run: ./.github/scripts/update-version.sh
         shell: bash
 
       - name: Commit version changes
         uses: stefanzweifel/git-auto-commit-action@v4
         id: commit
         with:
-          commit_message: "chore: bumped versions to ${{ env.VERSION }}"
+          commit_message: "chore: bumped version to ${{ env.VERSION }}"
 
       - name: Publish GitHub release
         uses: ncipollo/release-action@v1
