@@ -13,7 +13,7 @@ extension Bundle {
         case appName = "CFBundleName"
         case version = "CFBundleShortVersionString"
         case build = "CFBundleVersion"
-        case sdkVersion = "sdk_version"
+        case sdkVersion = "version"
     }
 
     static func appValue(for key: Key) -> String? {
