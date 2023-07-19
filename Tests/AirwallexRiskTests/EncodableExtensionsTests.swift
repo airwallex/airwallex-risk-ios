@@ -18,4 +18,12 @@ final class EncodableExtensionsTests: XCTestCase {
         let decoded = try JSONDecoder().decode(CodableMock.self, from: unwrappedData)
         XCTAssertEqual(decoded.id, id)
     }
+
+    func testJsonDataDateEncoding() throws {
+        let container = DateContainer(
+            date: .init(timeIntervalSince1970: 1689230812956.123456)
+        )
+        let jsonString = try container.jsonData?.jsonString
+        XCTAssertEqual(jsonString, "{\"date\":1689230812956123}")
+    }
 }

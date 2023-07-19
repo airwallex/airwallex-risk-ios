@@ -10,6 +10,8 @@ import Foundation
 
 extension Encodable {
     var jsonData: Data? {
-        try? JSONEncoder().encode(self)
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .wholeMillisecondsSince1970
+        return try? encoder.encode(self)
     }
 }

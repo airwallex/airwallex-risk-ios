@@ -29,7 +29,3 @@ final class DateEncodingStrategyExtensionsTests: XCTestCase {
         XCTAssertEqual(jsonString, "{\"date\":1689230812956123}")
     }
 }
-
-private struct DateContainer: Codable {
-    let date: Date
-}
