@@ -31,7 +31,7 @@ The Airwallex Risk iOS SDK requires Xcode 14.1 or later and is compatible with a
 - Add `https://github.com/airwallex/airwallex-risk-ios.git`
 - Select "Up to Next Major"
 
-If you encounter any problem or have a question about adding the package to an Xcode project, I suggest reading the [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) guide from Apple.
+If you encounter any problem or have a question about adding the package to an Xcode project, we suggest reading the [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) guide from Apple.
 
 ## Usage
 
