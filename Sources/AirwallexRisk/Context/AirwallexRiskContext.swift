@@ -47,19 +47,6 @@ class AirwallexRiskContext {
             device: .init()
         )
         self.defaults = defaults
-
-        print("+++ Context +++\n\(description)\n")
-    }
-
-    var description: String {
-        """
-        App name: \(dataCollector.app.name ?? "unknown")
-        AccountID: \(String(describing: account.wrappedValue.id))
-        Environment: \(String(describing: environment))
-        Tenant: \(tenant.rawValue)
-        DeviceID: \(deviceID)
-        SessionID: \(sessionID)
-        """
     }
 
     var shouldSendInstallationEvent: Bool {
