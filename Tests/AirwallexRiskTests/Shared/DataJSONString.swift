@@ -8,7 +8,7 @@
 import Foundation
 
 extension Data {
-    enum JSONString: Error {
+    enum JSONStringError: Error {
         case serialisation
     }
 
@@ -18,7 +18,7 @@ extension Data {
             guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
                   let data = try? JSONSerialization.data(withJSONObject: object, options: [.sortedKeys]),
                   let jsonString = String(data: data, encoding: .utf8) else {
-                throw JSONString.serialisation
+                throw JSONStringError.serialisation
             }
 
             return jsonString

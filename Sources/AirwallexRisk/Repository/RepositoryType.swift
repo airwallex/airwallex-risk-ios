@@ -9,9 +9,10 @@
 import Foundation
 
 protocol RepositoryType<T> {
+    // swiftlint:disable:next type_name
     associatedtype T
-    func add(_ event: T)
-    func add(_ events: [T])
+    func add(_ item: T)
+    func add(_ items: [T])
     func get() -> [T]
     func popAll() -> [T]?
 }

@@ -13,6 +13,5 @@ enum HTTPRequestError: Error {
 }
 
 enum HTTPResponseError: Error {
-    case deserialisation
     case invalid(statusCode: Int?)
 }

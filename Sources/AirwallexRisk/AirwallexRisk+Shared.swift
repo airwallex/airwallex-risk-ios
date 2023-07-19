@@ -10,13 +10,13 @@ import Foundation
 
 extension AirwallexRisk {
     /// Shared instance of ``AirwallexRisk``.
-    private(set) static var shared: AirwallexRisk?
+    private static var shared: AirwallexRisk?
 
     /// Starts the shared ``AirwallexRisk`` SDK instance.
     ///
     /// - Parameters:
     ///   - accountID: Airwallex account ID for app customer. Required for all scale customers.
-    ///   - configuration: ``AirwallexRiskConfiguration`` can be passed in if additional configuration is needed.
+    ///   - configuration: ``AirwallexRiskConfiguration`` can be passed in if additional configuration is needed. Set `isProduction` to `false` for test builds.
     /// - Remark: Must be called once, as early as possible in the apps lifecycle.
     public static func start(
         accountID: String?,

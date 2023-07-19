@@ -11,12 +11,12 @@ import Foundation
 class EventRepository: RepositoryType {
     private var events: [Event] = .init()
 
-    func add(_ event: Event) {
-        self.events.append(event)
+    func add(_ item: Event) {
+        self.events.append(item)
     }
 
-    func add(_ events: [Event]) {
-        self.events.insert(contentsOf: events, at: .zero)
+    func add(_ items: [Event]) {
+        self.events.insert(contentsOf: items, at: .zero)
     }
 
     func get() -> [Event] {
