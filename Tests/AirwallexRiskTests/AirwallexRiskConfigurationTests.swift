@@ -18,7 +18,7 @@ final class AirwallexRiskConfigurationTests: XCTestCase {
 
     func testCustomInit() {
         let config = AirwallexRiskConfiguration(isProduction: false, tenant: .internal)
-        XCTAssertEqual(config.environment, .staging)
+        XCTAssertEqual(config.environment, .demo)
         XCTAssertEqual(config.tenant, .internal)
     }
 }

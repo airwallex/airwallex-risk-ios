@@ -39,6 +39,6 @@ struct App: Codable {
     /// Example of return values
     ///  - `"1.0.0"`
     var sdkVersion: String? = {
-        Bundle.version
+        Bundle.sdkVersion
     }()
 }
