@@ -27,11 +27,11 @@ The Airwallex Risk iOS SDK requires Xcode 14.1 or later and is compatible with a
 
 #### Swift Package Manager
 
-- File > Swift Packages > Add Package Dependency
-- Add `https://github.com/airwallex/airwallex-risk-ios.git`
-- Select "Up to Next Major"
+- File > Add Packages…
+- Enter package URL `https://github.com/airwallex/airwallex-risk-ios`
+- Select "Up to Next Major Version"
 
-If you encounter any problem or have a question about adding the package to an Xcode project, we suggest reading the [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) guide from Apple.
+These instructions may vary slightly for different Xcode versions. If you encounter any problem or have a question about adding the package to an Xcode project, we suggest reading the [adding package dependencies to your app](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) guide from Apple.
 
 ## Usage
 
@@ -53,14 +53,15 @@ class AppDelegate {
 }
 ```
 
-Notes:
-
-- `accountID` is required in all Airwallex scale customer apps.
+**Notes**: 
+- `accountID` is required in all Airwallex scale customer apps. This will be your Airwallex account ID.
 - the optional `AirwallexRiskConfiguration` may also be used if needed. For test/debug builds you can set `isProduction: false`.
 
 #### Update user
 
 After the app user signs in to their Airwallex account, the app must send the users ID through to the SDK as follows. This will be persisted in the SDK until the next time this method is called. Set to `nil` on sign out.
+
+:warning: **Important**: The user ID here is the signed in user's individual Airwallex account ID, not your own system user ID.
 
 ```swift
 import AirwallexRisk
@@ -99,7 +100,7 @@ var request = URLRequest(url: URL(string: "https://www.airwallex.com/...")!)
 request.setValue(header.value, forHTTPHeaderField: header.field)
 ```
 
-The SDK also provides a convenience method to directly add the header to any URLRequest:
+Alternatively, the SDK provides a convenience URLRequest extension method that can be used to directly add the header to any Airwallex request:
 
 ```swift
 import AirwallexRisk
@@ -108,3 +109,6 @@ var request = URLRequest(url: URL(string: "https://www.airwallex.com/...")!)
 request.setAirwallexHeader()
 ```
 
+The header consists of
+- the field, which will always be `"x-risk-device-id"`, and
+- the value, which will be an internally generated device identifier.
