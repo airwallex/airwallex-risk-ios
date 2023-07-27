@@ -16,8 +16,8 @@ final class ModelTests: XCTestCase {
     }
 
     func testTenant() {
-        XCTAssertEqual(Tenant.internal.rawValue, "mobile-app")
-        XCTAssertEqual(Tenant.pa.rawValue, "pa-checkout")
-        XCTAssertEqual(Tenant.scale.rawValue, "scale")
+        XCTAssertEqual(Tenant.internal.rawValue, "Mobile app")
+        XCTAssertEqual(Tenant.pa.rawValue, "PA checkout")
+        XCTAssertEqual(Tenant.scale.rawValue, "Scale")
     }
 }

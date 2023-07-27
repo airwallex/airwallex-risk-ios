@@ -15,7 +15,7 @@ final class EventTests: XCTestCase {
         let context = AirwallexRiskContext(accountID: "accountID", environment: .production, tenant: .scale)
         let event = Event.test(eventID: eventID, context: context)
         XCTAssertEqual(event.eventID, eventID)
-        switch event.type {
+        switch event.event.type {
         case .automatic(.open): break
         default: XCTFail("Should be `.automatic(.open)`")
         }
