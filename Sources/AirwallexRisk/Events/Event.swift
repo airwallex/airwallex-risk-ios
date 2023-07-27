@@ -17,9 +17,7 @@ struct Event: Codable {
     let userID: String?
     let app: App
     let device: Device
-    let createdAtUTC: Date
-    let type: EventType
-    let screen: Screen
+    let event: Detail
 
     init(
         eventID: UUID = .init(),
@@ -36,9 +34,11 @@ struct Event: Codable {
         self.userID = context.user.wrappedValue.id
         self.app = .init(app: context.dataCollector.app)
         self.device = .init(device: context.dataCollector.device)
-        self.createdAtUTC = createdAtUTC
-        self.type = type
-        self.screen = .init(path: path)
+        self.event = .init(
+            createdAtUTC: createdAtUTC,
+            type: type,
+            screen: .init(path: path)
+        )
     }
 
     enum CodingKeys: String, CodingKey {
@@ -50,8 +50,6 @@ struct Event: Codable {
         case userID = "userId"
         case app
         case device
-        case createdAtUTC
-        case type
-        case screen
+        case event
     }
 }
