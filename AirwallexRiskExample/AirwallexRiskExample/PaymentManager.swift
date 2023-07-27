@@ -18,7 +18,7 @@ class PaymentManager {
         paymentRequest.setAirwallexHeader()
         
         // Log the payout event when sending payments.
-        AirwallexRisk.log(event: "payout", screen: "shop")
+        AirwallexRisk.log(event: "payout", screen: "payment")
     }
 }
 

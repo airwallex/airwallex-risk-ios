@@ -1,5 +1,5 @@
 //
-//  ShopView.swift
+//  PaymentView.swift
 //  AirwallexRiskExample
 //
 //  Created by Richie Shilton on 27/7/2023.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct ShopView: View {
+struct PaymentView: View {
     @ObservedObject var model: ContentViewModel
 
     var body: some View {

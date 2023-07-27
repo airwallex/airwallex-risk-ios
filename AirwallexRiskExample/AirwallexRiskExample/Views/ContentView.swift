@@ -20,7 +20,7 @@ struct ContentView: View {
     private var contentView: some View {
         switch model.viewState {
         case .initial: EntryView(model: model)
-        case .authenticated: ShopView(model: model)
+        case .authenticated: PaymentView(model: model)
         }
     }
 }

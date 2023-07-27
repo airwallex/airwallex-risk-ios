@@ -16,7 +16,7 @@
 		1D6377672A70E113006BC59E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6377662A70E113006BC59E /* AuthService.swift */; };
 		1D6377692A70E308006BC59E /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6377682A70E308006BC59E /* PaymentManager.swift */; };
 		1D63776B2A71E926006BC59E /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D63776A2A71E926006BC59E /* EntryView.swift */; };
-		1D63776D2A71E93B006BC59E /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D63776C2A71E93B006BC59E /* ShopView.swift */; };
+		1D63776D2A71E93B006BC59E /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D63776C2A71E93B006BC59E /* PaymentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		1D6377662A70E113006BC59E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1D6377682A70E308006BC59E /* PaymentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		1D63776A2A71E926006BC59E /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
-		1D63776C2A71E93B006BC59E /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		1D63776C2A71E93B006BC59E /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 			children = (
 				1D6377552A70D7D5006BC59E /* ContentView.swift */,
 				1D63776A2A71E926006BC59E /* EntryView.swift */,
-				1D63776C2A71E93B006BC59E /* ShopView.swift */,
+				1D63776C2A71E93B006BC59E /* PaymentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -170,7 +170,7 @@
 			files = (
 				1D6377562A70D7D5006BC59E /* ContentView.swift in Sources */,
 				1D6377692A70E308006BC59E /* PaymentManager.swift in Sources */,
-				1D63776D2A71E93B006BC59E /* ShopView.swift in Sources */,
+				1D63776D2A71E93B006BC59E /* PaymentView.swift in Sources */,
 				1D6377672A70E113006BC59E /* AuthService.swift in Sources */,
 				1D6377542A70D7D5006BC59E /* AirwallexRiskExampleApp.swift in Sources */,
 				1D6377652A70DF60006BC59E /* ContentViewModel.swift in Sources */,
