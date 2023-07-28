@@ -7,7 +7,14 @@
 //
 
 import Foundation
+#if !os(OSX)
 import UIKit
+#endif
+
+#if os(watchOS)
+import WatchKit
+#endif
+
 
 struct Device {
     /// Device language.
@@ -15,7 +22,7 @@ struct Device {
     /// Example of return values
     ///  - `"en"`
     var language: String? = {
-        if #available(iOS 16, *) {
+        if #available(iOS 16, tvOS 16, watchOS 9, *) {
             return Locale.current.language.languageCode?.identifier
         } else {
             return Locale.current.languageCode
@@ -27,7 +34,7 @@ struct Device {
     /// Example of return values
     ///  - `"US"`
     var region: String? = {
-        if #available(iOS 16, *) {
+        if #available(iOS 16, tvOS 16, watchOS 9, *) {
             return Locale.current.language.region?.identifier
         } else {
             return Locale.current.regionCode
@@ -47,7 +54,15 @@ struct Device {
     /// Example of return values
     ///  - `"iOS"`
     var osName: String = {
-        UIDevice.current.systemName
+        #if os(iOS) || os(tvOS)
+        return UIDevice.current.systemName
+        #elseif os(watchOS)
+        return "watchOS"
+        #elseif os(OSX)
+        return "macOS"
+        #else
+        return AirwallexValue.unknown
+        #endif
     }()
 
     /// Device operating system version number.
@@ -55,7 +70,15 @@ struct Device {
     /// Example of return values
     ///  - `"16.4"`
     var osVersion: String = {
-        UIDevice.current.systemVersion
+        #if os(iOS) || os(tvOS)
+        return UIDevice.current.systemVersion
+        #elseif os(watchOS)
+        return WKInterfaceDevice.current().systemVersion
+        #elseif os(OSX)
+        return ProcessInfo.processInfo.operatingSystemVersionString
+        #else
+        return AirwallexValue.unknown
+        #endif
     }()
 
     /// Device hardware model name.

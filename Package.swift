@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "AirwallexRisk",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v13), .macOS(.v13), .watchOS(.v7), .tvOS(.v14)
     ],
     products: [
         .library(
