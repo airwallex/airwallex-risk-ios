@@ -2,7 +2,8 @@
 
 ![Bitrise](https://img.shields.io/bitrise/8dac12ec-13a2-44fe-9492-8bccbf558dd2/main?token=iibkN6UESXAQsLNb8biNqg)
 ![Platforms](https://img.shields.io/badge/platforms-iOS-333333.svg)
-![SPM](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange)
+![Swift](https://img.shields.io/badge/Swift-5.8-blue.svg)
+![SPM](https://img.shields.io/badge/SPM-compatible-orange)
 
 The Airwallex Risk SDK is required for Airwallex scale customer apps.
 
@@ -21,7 +22,8 @@ The Airwallex Risk SDK is required for Airwallex scale customer apps.
 
 ## Requirements
 
-The Airwallex Risk iOS SDK requires Xcode 14.1 or later and is compatible with apps targeting iOS 13 or above.
+* iOS 13+
+* Swift 5.8+
 
 ### Installation
 
