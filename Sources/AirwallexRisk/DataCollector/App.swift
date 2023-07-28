@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct App: Codable {
     /// App name.
