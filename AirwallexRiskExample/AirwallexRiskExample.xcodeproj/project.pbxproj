@@ -384,7 +384,7 @@
 			repositoryURL = "https://github.com/airwallex/airwallex-risk-ios.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.1;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

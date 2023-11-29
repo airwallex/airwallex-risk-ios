@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airwallex/airwallex-risk-ios.git",
       "state" : {
-        "revision" : "e266b8890943f2d357b9036dba2677214935cc35",
-        "version" : "0.0.1"
+        "revision" : "6a56f9e96f3438546e0758caf1da979470d78b1c",
+        "version" : "1.0.0"
       }
     }
   ],
