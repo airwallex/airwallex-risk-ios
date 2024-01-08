@@ -13,7 +13,7 @@ final class AirwallexRiskClientTests: XCTestCase {
     let context: AirwallexRiskContext = .test()
 
     func testLogEventSuccess() async throws {
-        let url = URL(string: "https://staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
+        let url = URL(string: "https://bws-staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
         let session = URLSession.successMock(url: url, encodable: PostEventsResponse(message: "Success"))
         let client = AirwallexRiskClient(session: session, context: context)
         let response = try await client.log(events: [.test()])
@@ -21,7 +21,7 @@ final class AirwallexRiskClientTests: XCTestCase {
     }
 
     func testLogEventError() async {
-        let url = URL(string: "https://staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
+        let url = URL(string: "https://bws-staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
         let session = URLSession.errorMock(url: url, errorCode: 400)
         let client = AirwallexRiskClient(session: session, context: context)
         let response = try? await client.log(events: [.test()])

@@ -38,7 +38,7 @@ enum AirwallexUserDefaultKey {
 }
 
 enum AirwallexHost {
-    static let production = "www.airwallex.com"
-    static let demo = "demo.airwallex.com"
-    static let staging = "staging.airwallex.com"
+    static let production = "bws.airwallex.com"
+    static let demo = "bws-demo.airwallex.com"
+    static let staging = "bws-staging.airwallex.com"
 }
