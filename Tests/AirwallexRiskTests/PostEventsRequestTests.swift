@@ -19,6 +19,6 @@ final class PostEventsRequestTests: XCTestCase {
     func testInit() throws {
         let request = PostEventsRequest(events: [.init(type: .custom(event: "login"), context: testContext)], context: testContext)
         let urlRequest: URLRequest = try .init(request: request)
-        XCTAssertEqual(urlRequest.url?.absoluteString, "https://staging.airwallex.com/bws/v2/m/\(testContext.sessionID)")
+        XCTAssertEqual(urlRequest.url?.absoluteString, "https://bws-staging.airwallex.com/bws/v2/m/\(testContext.sessionID)")
     }
 }
