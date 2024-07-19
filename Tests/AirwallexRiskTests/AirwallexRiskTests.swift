@@ -13,13 +13,13 @@ final class AirwallexRiskTests: XCTestCase {
     private var repository: EventRepository!
     private var testContext: AirwallexRiskContext!
     private var testEventManager: MockEventManager!
-    private var airwallexRisk: AirwallexRisk!
+    private var airwallexRisk: Risk!
 
     override func setUp() {
         repository = .init()
         testContext = .test()
         testEventManager = .init()
-        airwallexRisk = AirwallexRisk(
+        airwallexRisk = Risk(
             context: testContext,
             eventManager: testEventManager
         )

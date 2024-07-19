@@ -16,12 +16,12 @@ final class HeaderTests: XCTestCase {
     }
 
     func testSharedAirwallexHeaderNotStarted() {
-        XCTAssertNil(AirwallexRisk.header)
+        XCTAssertNil(Risk.header)
     }
 
     func testManualHeader() throws {
         let context = AirwallexRiskContext.test()
-        let risk = AirwallexRisk(
+        let risk = Risk(
             context: context,
             eventManager: MockEventManager()
         )

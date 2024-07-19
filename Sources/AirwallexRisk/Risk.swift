@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class AirwallexRisk {
+public class Risk {
     private let context: AirwallexRiskContext
     private let eventManager: EventManagerType
 

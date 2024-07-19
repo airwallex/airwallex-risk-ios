@@ -8,17 +8,17 @@
 
 import Foundation
 
-extension AirwallexRisk {
-    /// Shared instance of ``AirwallexRisk``.
-    private static var shared: AirwallexRisk?
+extension Risk {
+    /// Shared instance of ``Risk``.
+    private static var shared: Risk?
 
-    /// Starts the shared ``AirwallexRisk`` SDK instance.
+    /// Starts the shared ``Risk`` SDK instance.
     ///
     /// - Parameters:
     ///   - accountID: Airwallex account ID for app customer. Required for all scale customers.
     ///   - configuration: ``AirwallexRiskConfiguration`` can be passed in if additional configuration is needed. Set `isProduction` to `false` for test builds.
     /// - Remark: Must be called once, as early as possible in the apps lifecycle.
-    public static func start(
+    @objc public static func start(
         accountID: String?,
         with configuration: AirwallexRiskConfiguration = .init()
     ) {
@@ -42,7 +42,7 @@ extension AirwallexRisk {
     /// Use this method if the account ID changes after calling ``start(accountID:with:)``. This method is unneeded by most users.
     /// - Parameters:
     ///   - accountID: Airwallex account ID. Set `nil` if unavailable.
-    public static func set(accountID: String?) {
+    @objc public static func set(accountID: String?) {
         guard let shared else {
             print(AirwallexValue.notStartedWarning)
             return
@@ -55,7 +55,7 @@ extension AirwallexRisk {
     /// Use this method after user sign in/out to store the user ID to be sent with events.
     /// - Parameters:
     ///   - userID: Signed in Airwallex user ID. Set `nil` on sign out.
-    public static func set(userID: String?) {
+    @objc public static func set(userID: String?) {
         guard let shared else {
             print(AirwallexValue.notStartedWarning)
             return
@@ -69,7 +69,7 @@ extension AirwallexRisk {
     /// - Parameters:
     ///   - event: App event that triggered this method call.
     ///   - screen: Current app view. Optional.
-    public static func log(
+    @objc public static func log(
         event: String,
         screen: String? = nil
     ) {

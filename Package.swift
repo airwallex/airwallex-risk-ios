@@ -11,6 +11,7 @@ let package = Package(
     products: [
         .library(
             name: "AirwallexRisk",
+            type: .dynamic,
             targets: ["AirwallexRisk"]
         ),
     ],
