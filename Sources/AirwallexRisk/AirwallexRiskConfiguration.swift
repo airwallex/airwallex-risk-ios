@@ -11,6 +11,7 @@ import Foundation
 @objc public class AirwallexRiskConfiguration: NSObject {
     let environment: AirwallexRiskEnvironment
     let tenant: Tenant
+    let bufferTimeInterval: TimeInterval
 
     /// AirwallexRisk configuration options.
     ///
@@ -32,10 +33,12 @@ import Foundation
     ///   - environment: Airwallex risk environment, set to production for release builds.
     ///   - tenant: Airwallex risk SDK tenant.
     public init(
-        environment: AirwallexRiskEnvironment,
-        tenant: Tenant
+        environment: AirwallexRiskEnvironment = .production,
+        tenant: Tenant = .scale,
+        bufferTimeInterval: TimeInterval = 20
     ) {
         self.environment = environment
         self.tenant = tenant
+        self.bufferTimeInterval = bufferTimeInterval
     }
 }

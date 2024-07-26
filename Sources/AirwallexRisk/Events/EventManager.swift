@@ -23,7 +23,8 @@ class EventManager: EventManagerType {
     convenience init(
         context: AirwallexRiskContext,
         repository: any RepositoryType<Event> = EventRepository(),
-        session: URLSession = .shared
+        session: URLSession = .shared,
+        timeInterval: TimeInterval
     ) {
         self.init(
             repository: repository,
@@ -32,7 +33,7 @@ class EventManager: EventManagerType {
                 context: context
             ),
             eventScheduler: EventScheduler(
-                timeInterval: AirwallexValue.timeInterval(context: context)
+                timeInterval: timeInterval
             ),
             automaticEventProvider: AutomaticEventProvider(
                 repository: repository,

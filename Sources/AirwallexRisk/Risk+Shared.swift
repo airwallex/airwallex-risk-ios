@@ -33,7 +33,10 @@ extension Risk {
         )
         shared = .init(
             context: context,
-            eventManager: EventManager(context: context)
+            eventManager: EventManager(
+                context: context,
+                timeInterval: configuration.bufferTimeInterval
+            )
         )
     }
 
