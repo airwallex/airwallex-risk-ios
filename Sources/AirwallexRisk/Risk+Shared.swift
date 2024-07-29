@@ -97,4 +97,13 @@ extension Risk {
         }
         return shared.header
     }
+    
+    /// Airwallex session ID. Unique per app run.
+    @objc public static var sessionID: UUID? {
+        guard let shared else {
+            print(AirwallexValue.notStartedWarning)
+            return nil
+        }
+        return shared.sessionID
+    }
 }

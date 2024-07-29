@@ -29,6 +29,10 @@ final class AirwallexRiskTests: XCTestCase {
         XCTAssertEqual(airwallexRisk.header.field, AirwallexKey.header)
         XCTAssertEqual(airwallexRisk.header.value, testContext.deviceID.wrappedValue.uuidString)
     }
+    
+    func testSessionID() {
+        XCTAssertEqual(airwallexRisk.sessionID, testContext.sessionID)
+    }
 
     func testSetAccountID() {
         let id = "accountID2"

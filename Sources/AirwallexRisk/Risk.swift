@@ -29,6 +29,11 @@ public class Risk {
             value: context.deviceID.wrappedValue.uuidString
         )
     }
+    
+    /// Airwallex session ID. Unique per app run.
+    var sessionID: UUID {
+        context.sessionID
+    }
 
     /// Sets the Airwallex  account ID.
     ///
