@@ -2,6 +2,10 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
+import Foundation
+
+let buildForXCFramework = ProcessInfo.processInfo.environment["BUILD_FOR_XCFRAMEWORK"] == "true"
+let libraryType: Product.Library.LibraryType? = buildForXCFramework ? .dynamic : nil
 
 let package = Package(
     name: "AirwallexRisk",
@@ -11,6 +15,7 @@ let package = Package(
     products: [
         .library(
             name: "AirwallexRisk",
+            type: libraryType,
             targets: ["AirwallexRisk"]
         ),
     ],

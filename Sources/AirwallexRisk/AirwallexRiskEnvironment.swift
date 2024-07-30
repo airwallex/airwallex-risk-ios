@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AirwallexRiskEnvironment {
+@objc public enum AirwallexRiskEnvironment: Int {
     case production
     case demo
     case staging

@@ -100,13 +100,15 @@ private extension EventManager {
     static func manager(
         context: AirwallexRiskContext,
         repository: any RepositoryType<Event> = EventRepository(),
-        session: URLSession? = nil) -> EventManager {
-            let url = URL(string: "https://bws-staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
-            let session = session ?? .successMock(url: url, encodable: PostEventsResponse(message: "Success"))
-            return .init(
-                context: context,
-                repository: repository,
-                session: session
-            )
-        }
+        session: URLSession? = nil
+    ) -> EventManager {
+        let url = URL(string: "https://bws-staging.airwallex.com/bws/v2/m/\(context.sessionID.uuidString)")!
+        let session = session ?? .successMock(url: url, encodable: PostEventsResponse(message: "Success"))
+        return .init(
+            context: context,
+            repository: repository,
+            session: session,
+            timeInterval: 5
+        )
+    }
 }

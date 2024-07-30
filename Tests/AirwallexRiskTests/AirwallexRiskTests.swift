@@ -13,13 +13,13 @@ final class AirwallexRiskTests: XCTestCase {
     private var repository: EventRepository!
     private var testContext: AirwallexRiskContext!
     private var testEventManager: MockEventManager!
-    private var airwallexRisk: AirwallexRisk!
+    private var airwallexRisk: Risk!
 
     override func setUp() {
         repository = .init()
         testContext = .test()
         testEventManager = .init()
-        airwallexRisk = AirwallexRisk(
+        airwallexRisk = Risk(
             context: testContext,
             eventManager: testEventManager
         )
@@ -28,6 +28,10 @@ final class AirwallexRiskTests: XCTestCase {
     func testHeader() {
         XCTAssertEqual(airwallexRisk.header.field, AirwallexKey.header)
         XCTAssertEqual(airwallexRisk.header.value, testContext.deviceID.wrappedValue.uuidString)
+    }
+    
+    func testSessionID() {
+        XCTAssertEqual(airwallexRisk.sessionID, testContext.sessionID)
     }
 
     func testSetAccountID() {

@@ -11,7 +11,7 @@ import Foundation
 extension URLRequest {
     /// Convenience method to attach the Airwallex risk header to any URLRequest.
     public mutating func setAirwallexHeader() {
-        guard let header = AirwallexRisk.header else {
+        guard let header = Risk.header else {
             return
         }
         setValue(

@@ -1,0 +1,43 @@
+name: Build XCFramework
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-xcframework:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Build .framework for iOS devices
+      run: BUILD_FOR_XCFRAMEWORK=true xcodebuild archive \
+             -scheme AirwallexRisk \
+             -sdk iphoneos \
+             -destination 'generic/platform=iOS' \
+             -archivePath './build/device.xcarchive' \
+             SKIP_INSTALL=NO \
+             BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+
+    - name: Build .framework for iOS simulator
+      run: BUILD_FOR_XCFRAMEWORK=true xcodebuild archive \
+             -scheme AirwallexRisk \
+             -sdk iphonesimulator \
+             -destination 'generic/platform=iOS Simulator' \
+             -archivePath './build/simulator.xcarchive' \
+             SKIP_INSTALL=NO \
+             BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+
+    - name: Create XCFramework
+      run: xcodebuild -create-xcframework \
+             -framework ./build/device.xcarchive/Products/Library/Frameworks/AirwallexRisk.framework \
+             -framework ./build/simulator.xcarchive/Products/Library/Frameworks/AirwallexRisk.framework \
+             -output ./build/AirwallexRisk.xcframework
+
+    - name: Upload XCFramework
+      uses: actions/upload-artifact@v4
+      with:
+        name: YourFramework.xcframework
+        path: ./build/YourFramework.xcframework
+        retention-days: 30

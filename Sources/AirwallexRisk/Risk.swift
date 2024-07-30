@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class AirwallexRisk {
+public class Risk {
     private let context: AirwallexRiskContext
     private let eventManager: EventManagerType
 
@@ -28,6 +28,11 @@ public class AirwallexRisk {
             field: AirwallexKey.header,
             value: context.deviceID.wrappedValue.uuidString
         )
+    }
+    
+    /// Airwallex session ID. Unique per app run.
+    var sessionID: UUID {
+        context.sessionID
     }
 
     /// Sets the Airwallex  account ID.
