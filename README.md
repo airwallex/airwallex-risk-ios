@@ -47,7 +47,7 @@ import AirwallexRisk
 class AppDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    AirwallexRisk.start(
+    Risk.start(
       accountID: "YOUR_ACCOUNT_ID", // Required
       with: AirwallexRiskConfiguration(isProduction: true)
     )
@@ -57,7 +57,7 @@ class AppDelegate {
 
 **Notes**: 
 - `accountID` is required in all Airwallex scale customer apps. This will be your Airwallex account ID.
-- the optional `AirwallexRiskConfiguration` may also be used if needed. For test/debug builds you can set `isProduction: false`.
+- the optional `AirwallexRiskConfiguration` may also be used if needed. For test/debug builds you can set `isProduction: false` or `environment: .staging/.demo`. You can also customise the frequency of sending logs by `bufferTimeInterval: 5`.  
 
 #### Update user
 
@@ -68,7 +68,7 @@ After the app user signs in to their Airwallex account, the app must send the us
 ```swift
 import AirwallexRisk
 
-AirwallexRisk.set(userID: "USER_ID")
+Risk.set(userID: "USER_ID")
 ```
   
 #### Events
@@ -82,7 +82,7 @@ Use the following snippet to send event name and current screen name.
 ```swift
 import AirwallexRisk
 
-AirwallexRisk.log(
+Risk.log(
   event: "EVENT_NAME",
   screen: "SCREEN_NAME"
 )
@@ -95,7 +95,7 @@ When your app sends a request to Airwallex, you must add the provided header int
 ```swift
 import AirwallexRisk
 
-guard let header = AirwallexRisk.header else {
+guard let header = Risk.header else {
   return
 }
 var request = URLRequest(url: URL(string: "https://www.airwallex.com/...")!)
@@ -114,3 +114,13 @@ request.setAirwallexHeader()
 The header consists of
 - the field, which will always be `"x-risk-device-id"`, and
 - the value, which will be an internally generated device identifier.
+
+#### Session ID
+
+You can get the unique ID per app running session and provide it into Airwallex requests if needed (optional).
+
+```swift
+import AirwallexRisk
+
+let sessionID = Risk.SessionID
+```

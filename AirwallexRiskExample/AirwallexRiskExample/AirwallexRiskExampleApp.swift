@@ -12,7 +12,7 @@ import AirwallexRisk
 @main
 struct AirwallexRiskExampleApp: App {
     init() {
-        Risk.start(
+        AirwallexRisk.start(
             accountID: "YOUR_ACCOUNT_ID",
             with: .init(isProduction: false)
         )
