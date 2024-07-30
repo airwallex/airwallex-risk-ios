@@ -20,6 +20,13 @@ jobs:
           -archivePath './build/device.xcarchive' \
           SKIP_INSTALL=NO \
           BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+          
+    - name: Debug device archive contents
+      run: |
+        echo "Contents of iOS devices archive:" \
+        ls -R ./build/device.xcarchive \
+        echo "Checking framework existence:" \
+        ls -d ./build/device.xcarchive/Products/Library/Frameworks/AirwallexRisk.framework || echo "iOS devices framework not found!"
 
     - name: Build .framework for iOS simulator
       run: | 
@@ -30,6 +37,16 @@ jobs:
           -archivePath './build/simulator.xcarchive' \
           SKIP_INSTALL=NO \
           BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+
+    - name: Debug simulator archive contents
+      run: |
+        echo "Contents of iOS simulators archive:" \
+        ls -R ./build/simulator.xcarchive \
+        echo "Checking framework existence:" \
+        ls -d ./build/simulator.xcarchive/Products/Library/Frameworks/AirwallexRisk.framework || echo "iOS simulators framework not found!"
+
+    - name: List build directory
+      run: ls -R ./build
 
     - name: Create XCFramework
       run: |
