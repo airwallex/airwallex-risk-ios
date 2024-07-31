@@ -13,8 +13,8 @@ jobs:
 
     - name: Install swift-create-xcframework tool
       run: |
-        git clone https://github.com/unsignedapps/swift-create-xcframework.git \
-        cd swift-create-xcframework \
+        git clone https://github.com/unsignedapps/swift-create-xcframework.git
+        cd swift-create-xcframework
         make install
 
     - name: Create XCFramework
@@ -22,7 +22,7 @@ jobs:
 
     - name: Copy resources
       run: |
-        cp Sources/AirwallexRisk/Resources/* AirwallexRisk.xcframework/ios-arm64/AirwallexRisk.framework \
+        cp Sources/AirwallexRisk/Resources/* AirwallexRisk.xcframework/ios-arm64/AirwallexRisk.framework
         cp Sources/AirwallexRisk/Resources/* AirwallexRisk.xcframework/ios-arm64_x86_64-simulator/AirwallexRisk.framework
 
     - name: Upload XCFramework
