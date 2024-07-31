@@ -20,7 +20,13 @@ extension Bundle {
     }
 
     static var sdkVersion: String? {
-        guard let url = Bundle(for: Risk.self).url(forResource: AirwallexKey.version, withExtension: "json") else {
+        #if CREATE_XCFRAMEWORK
+        let bundle = Bundle(for: Risk.self)
+        #else
+        let bundle = Bundle.module
+        #endif
+        
+        guard let url = bundle.url(forResource: AirwallexKey.version, withExtension: "json") else {
             return nil
         }
         do {

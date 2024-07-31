@@ -18,7 +18,7 @@ jobs:
         make install
 
     - name: Create XCFramework
-      run: swift create-xcframework --platform ios
+      run: swift create-xcframework --platform ios --xc-setting OTHER_SWIFT_FLAGS='-DCREATE_XCFRAMEWORK'
 
     - name: Copy resources
       run: |
