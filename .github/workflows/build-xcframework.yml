@@ -33,5 +33,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: AirwallexRisk.xcframework
-        path: ./build/AirwallexRisk.xcframework
+        path: AirwallexRisk.xcframework
         retention-days: 30
