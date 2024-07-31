@@ -8,18 +8,16 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
     - uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
 
-    - uses: swift-actions/setup-swift@v2
-
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
     - name: Install swift-create-xcframework tool
       run: |
-        git clone https://github.com/unsignedapps/swift-create-xcframework.git
+        git clone https://github.com/segment-integrations/swift-create-xcframework.git
         cd swift-create-xcframework
         make install
 
