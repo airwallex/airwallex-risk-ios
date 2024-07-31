@@ -19,7 +19,7 @@ import Foundation
     /// - Parameters:
     ///   - isProduction: Set to false for pre-production or test builds.
     ///   - tenant: Do not modify unless requested by Airwallex.
-    public convenience init(
+    @objc public convenience init(
         isProduction: Bool = true,
         tenant: Tenant = .scale
     ) {
@@ -32,7 +32,7 @@ import Foundation
     /// - Parameters:
     ///   - environment: Airwallex risk environment, set to production for release builds.
     ///   - tenant: Airwallex risk SDK tenant.
-    public init(
+    @objc public init(
         environment: AirwallexRiskEnvironment = .production,
         tenant: Tenant = .scale,
         bufferTimeInterval: TimeInterval = 20

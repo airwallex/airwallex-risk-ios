@@ -20,11 +20,17 @@ extension Bundle {
     }
 
     static var sdkVersion: String? {
-        guard let path = Bundle.module.path(forResource: AirwallexKey.version, ofType: "json") else {
+        #if CREATE_XCFRAMEWORK
+        let bundle = Bundle(for: Risk.self)
+        #else
+        let bundle = Bundle.module
+        #endif
+        
+        guard let url = bundle.url(forResource: AirwallexKey.version, withExtension: "json") else {
             return nil
         }
         do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+            let data = try Data(contentsOf: url, options: .mappedIfSafe)
             let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
             return result?[AirwallexKey.version]
         } catch {
