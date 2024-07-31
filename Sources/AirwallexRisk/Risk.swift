@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Risk {
+@objc public class Risk: NSObject {
     private let context: AirwallexRiskContext
     private let eventManager: EventManagerType
 

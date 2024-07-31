@@ -11,32 +11,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Build .framework for iOS devices
+    - name: Install swift-create-xcframework tool
       run: |
-        BUILD_FOR_XCFRAMEWORK=true xcodebuild archive \
-          -scheme AirwallexRisk \
-          -sdk iphoneos \
-          -destination 'generic/platform=iOS' \
-          -archivePath './build/device.xcarchive' \
-          SKIP_INSTALL=NO \
-          BUILD_LIBRARY_FOR_DISTRIBUTION=YES
-
-    - name: Build .framework for iOS simulator
-      run: | 
-        BUILD_FOR_XCFRAMEWORK=true xcodebuild archive \
-          -scheme AirwallexRisk \
-          -sdk iphonesimulator \
-          -destination 'generic/platform=iOS Simulator' \
-          -archivePath './build/simulator.xcarchive' \
-          SKIP_INSTALL=NO \
-          BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+        git clone https://github.com/unsignedapps/swift-create-xcframework.git \
+        cd swift-create-xcframework \
+        make install
 
     - name: Create XCFramework
+      run: swift create-xcframework --platform ios
+
+    - name: Copy resources
       run: |
-        xcodebuild -create-xcframework \
-          -framework ./build/device.xcarchive/Products/usr/local/lib/AirwallexRisk.framework \
-          -framework ./build/simulator.xcarchive/Products/usr/local/lib/AirwallexRisk.framework \
-          -output ./build/AirwallexRisk.xcframework
+        cp Sources/AirwallexRisk/Resources/* AirwallexRisk.xcframework/ios-arm64/AirwallexRisk.framework \
+        cp Sources/AirwallexRisk/Resources/* AirwallexRisk.xcframework/ios-arm64_x86_64-simulator/AirwallexRisk.framework
 
     - name: Upload XCFramework
       uses: actions/upload-artifact@v4
