@@ -22,7 +22,7 @@ jobs:
         make install
 
     - name: Create XCFramework
-      run: swift create-xcframework --platform ios --xc-setting OTHER_SWIFT_FLAGS='-DCREATE_XCFRAMEWORK'
+      run: swift create-xcframework --platform ios --xc-setting OTHER_SWIFT_FLAGS='-DCREATE_XCFRAMEWORK -Xfrontend -empty-abi-descriptor'
 
     - name: Copy resources
       run: |
@@ -32,6 +32,6 @@ jobs:
     - name: Upload XCFramework
       uses: actions/upload-artifact@v4
       with:
-        name: AirwallexRisk.xcframework
+        name: Artifact
         path: AirwallexRisk.xcframework
         retention-days: 30
