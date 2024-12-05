@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,12 +11,12 @@
 		1D6377562A70D7D5006BC59E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6377552A70D7D5006BC59E /* ContentView.swift */; };
 		1D6377582A70D7D6006BC59E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D6377572A70D7D6006BC59E /* Assets.xcassets */; };
 		1D63775B2A70D7D6006BC59E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D63775A2A70D7D6006BC59E /* Preview Assets.xcassets */; };
-		1D6377632A70D7EF006BC59E /* AirwallexRisk in Frameworks */ = {isa = PBXBuildFile; productRef = 1D6377622A70D7EF006BC59E /* AirwallexRisk */; };
 		1D6377652A70DF60006BC59E /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6377642A70DF60006BC59E /* ContentViewModel.swift */; };
 		1D6377672A70E113006BC59E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6377662A70E113006BC59E /* AuthService.swift */; };
 		1D6377692A70E308006BC59E /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6377682A70E308006BC59E /* PaymentManager.swift */; };
 		1D63776B2A71E926006BC59E /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D63776A2A71E926006BC59E /* EntryView.swift */; };
 		1D63776D2A71E93B006BC59E /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D63776C2A71E93B006BC59E /* PaymentView.swift */; };
+		D867D7B52D01719B0023C7A7 /* AirwallexRisk in Frameworks */ = {isa = PBXBuildFile; productRef = D867D7B42D01719B0023C7A7 /* AirwallexRisk */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D6377632A70D7EF006BC59E /* AirwallexRisk in Frameworks */,
+				D867D7B52D01719B0023C7A7 /* AirwallexRisk in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,7 +109,7 @@
 			);
 			name = AirwallexRiskExample;
 			packageProductDependencies = (
-				1D6377622A70D7EF006BC59E /* AirwallexRisk */,
+				D867D7B42D01719B0023C7A7 /* AirwallexRisk */,
 			);
 			productName = AirwallexRiskExample;
 			productReference = 1D6377502A70D7D5006BC59E /* AirwallexRiskExample.app */;
@@ -140,7 +140,7 @@
 			);
 			mainGroup = 1D6377472A70D7D5006BC59E;
 			packageReferences = (
-				1D6377612A70D7EF006BC59E /* XCRemoteSwiftPackageReference "airwallex-risk-ios" */,
+				D867D7B32D01719B0023C7A7 /* XCLocalSwiftPackageReference "../../airwallex-risk-ios" */,
 			);
 			productRefGroup = 1D6377512A70D7D5006BC59E /* Products */;
 			projectDirPath = "";
@@ -378,21 +378,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		1D6377612A70D7EF006BC59E /* XCRemoteSwiftPackageReference "airwallex-risk-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airwallex/airwallex-risk-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		D867D7B32D01719B0023C7A7 /* XCLocalSwiftPackageReference "../../airwallex-risk-ios" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../airwallex-risk-ios";
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1D6377622A70D7EF006BC59E /* AirwallexRisk */ = {
+		D867D7B42D01719B0023C7A7 /* AirwallexRisk */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1D6377612A70D7EF006BC59E /* XCRemoteSwiftPackageReference "airwallex-risk-ios" */;
 			productName = AirwallexRisk;
 		};
 /* End XCSwiftPackageProductDependency section */
