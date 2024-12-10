@@ -22,7 +22,7 @@ jobs:
           token: ${{ secrets.SERVICE_ACCOUNT_PAT }}
       
       - name: Configure Semantic Release
-        run: echo '{"branches":[],"plugins":["@semantic-release/commit-analyzer","@semantic-release/release-notes-generator","@semantic-release/github"]}' > .releaserc.json
+        run: echo '{"branches":[],"tagFormat":"${version}","plugins":["@semantic-release/commit-analyzer","@semantic-release/release-notes-generator","@semantic-release/github"]}' > .releaserc.json
         
       - name: Work out the new version via Semantic Release
         if: ${{ inputs.version == '' }}
