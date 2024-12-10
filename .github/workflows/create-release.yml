@@ -20,7 +20,7 @@ jobs:
           # Bypass protected branch setting by using a service account PAT
           # see more at: https://github.com/community/community/discussions/13836
           token: ${{ secrets.SERVICE_ACCOUNT_PAT }}
-      
+        
       - name: Work out the new version via Semantic Release
         if: ${{ inputs.version == '' }}
         uses: cycjimmy/semantic-release-action@v3
