@@ -5,7 +5,7 @@
 ![Swift](https://img.shields.io/badge/Swift-5.8-blue.svg)
 ![SPM](https://img.shields.io/badge/SPM-compatible-orange)
 
-The Airwallex Risk SDK provides device intelligence and fraud detection for Airwallex customer apps.
+The Airwallex Risk SDK provides device intelligence and fraud detection capabilities for merchant and platform apps that integrate with Airwallex services.
 
 ## Use Cases
 
