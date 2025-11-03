@@ -12,7 +12,7 @@ The Airwallex Risk SDK provides device intelligence and fraud detection capabili
 This SDK supports two primary scenarios:
 
 1. **Payment Acceptance (PA)**: For merchant mobile apps accepting payments
-2. **Scaled Platform Account**: For platforms onboarding connected accounts and facilitating transfers
+2. **Scaled Platform Account**: For platforms that programmatically create connected accounts for businesses and individuals, and enable them with financial capabilities
 
 ## Table of contents
 
