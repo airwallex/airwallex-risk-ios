@@ -12,7 +12,7 @@ The Airwallex Risk SDK provides device intelligence and fraud detection capabili
 This SDK supports two primary scenarios:
 
 1. **Payment Acceptance (PA)**: For merchant mobile apps accepting payments
-2. **Scaled Platform Account**: For platforms that programmatically create connected accounts for businesses and individuals, and enable them with financial capabilities
+2. **Connected Accounts**: For platforms that programmatically create connected accounts for businesses and individuals, and enable them with financial capabilities
 
 ## Table of contents
 
@@ -64,7 +64,7 @@ class AppDelegate {
 }
 ```
 
-**For Scaled Platform Account scenario:**
+**For Connected Accounts scenario:**
 
 ```swift
 import AirwallexRisk
@@ -82,7 +82,7 @@ class AppDelegate {
 
 **Notes**:
 - **Payment Acceptance**: `accountID` is **required** and should be the PA merchant's account ID at Airwallex.
-- **Scaled Platform**: `accountID` is **optional** at startup. Set the connected account's account ID at Airwallex later using `Risk.set(accountID:)` when available.
+- **Connected Accounts**: `accountID` is **optional** at startup. Set the connected account's account ID at Airwallex later using `Risk.set(accountID:)` when available.
 - The optional `AirwallexRiskConfiguration` may also be used if needed. For test/debug builds you can set `isProduction: false` or `environment: .staging/.demo`. You can also customise the frequency of sending logs by `bufferTimeInterval: 5`.  
 
 #### Update user
@@ -102,7 +102,7 @@ Risk.set(userID: nil) // Set to nil on sign out
 
 :warning: **Important**: The user ID should be the signed-in user's Airwallex user ID, not your own system user ID.
 
-**For Scaled Platform Account scenario:**
+**For Connected Accounts scenario:**
 
 When a platform user (connected account) signs in or out, set both the account ID and user ID to the connected account's Airwallex account ID:
 
@@ -119,7 +119,7 @@ Risk.set(accountID: nil)
 Risk.set(userID: nil)
 ```
 
-:warning: **Important**: For Scaled Platform, both `accountID` and `userID` should be set to the connected account's Airwallex account ID (not the platform's account ID, and not the platform's internal user ID).
+:warning: **Important**: For Connected Accounts, both `accountID` and `userID` should be set to the connected account's Airwallex account ID (not the platform's account ID, and not the platform's internal user ID).
   
 #### Events
 
