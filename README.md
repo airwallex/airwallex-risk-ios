@@ -91,20 +91,20 @@ The SDK needs to be updated when users sign in or out.
 
 **For Payment Acceptance (PA) scenario:**
 
-After a user signs in, set their user ID:
+When a user signs in to the merchant app, it's recommended to set their user ID (especially if your business requires user registration before payment):
 
 ```swift
 import AirwallexRisk
 
-Risk.set(userID: "USER_ID") // Set on sign in
+Risk.set(userID: "USER_ID") // Recommended: Set on sign in
 Risk.set(userID: nil) // Set to nil on sign out
 ```
 
-:warning: **Important**: The user ID should be the signed-in user's Airwallex user ID, not your own system user ID.
+:warning: **Important**: The user ID should be the merchant's internal user identifier for their customer, not an Airwallex user ID.
 
 **For Connected Accounts scenario:**
 
-When a platform user (connected account) signs in or out, set both the account ID and user ID to the connected account's Airwallex account ID:
+**Required:** When a platform user (connected account) signs in or out, you must set both the account ID and user ID to the connected account's Airwallex account ID:
 
 ```swift
 import AirwallexRisk
