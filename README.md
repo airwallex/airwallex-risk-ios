@@ -5,7 +5,14 @@
 ![Swift](https://img.shields.io/badge/Swift-5.8-blue.svg)
 ![SPM](https://img.shields.io/badge/SPM-compatible-orange)
 
-The Airwallex Risk SDK is required for Airwallex scale customer apps.
+The Airwallex Risk SDK provides device intelligence and fraud detection for Airwallex customer apps.
+
+## Use Cases
+
+This SDK supports two primary scenarios:
+
+1. **Payment Acceptance (PA)**: For merchant mobile apps accepting payments
+2. **Scaled Platform Account**: For platforms onboarding connected accounts and facilitating transfers
 
 ## Table of contents
 
@@ -39,7 +46,9 @@ These instructions may vary slightly for different Xcode versions. If you encoun
 
 #### Quick start
 
-The SDK must be started as early as possible in your application lifecycle. We recommend adding the `start(accountID:with:)` method in the application delegate:
+The SDK must be started as early as possible in your application lifecycle. We recommend adding the `start(accountID:with:)` method in the application delegate.
+
+**For Payment Acceptance (PA) scenario:**
 
 ```swift
 import AirwallexRisk
@@ -48,28 +57,69 @@ class AppDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     Risk.start(
-      accountID: "YOUR_ACCOUNT_ID", // Required
+      accountID: "YOUR_MERCHANT_ACCOUNT_ID", // Required: Your merchant's Airwallex account ID
       with: AirwallexRiskConfiguration(isProduction: true)
     )
   }
 }
 ```
 
-**Notes**: 
-- `accountID` is required in all Airwallex scale customer apps. This will be your Airwallex account ID.
-- the optional `AirwallexRiskConfiguration` may also be used if needed. For test/debug builds you can set `isProduction: false` or `environment: .staging/.demo`. You can also customise the frequency of sending logs by `bufferTimeInterval: 5`.  
-
-#### Update user
-
-After the app user signs in to their Airwallex account, the app must send the users ID through to the SDK as follows. This will be persisted in the SDK until the next time this method is called. Set to `nil` on sign out.
-
-:warning: **Important**: The user ID here is the signed in user's individual Airwallex account ID, not your own system user ID.
+**For Scaled Platform Account scenario:**
 
 ```swift
 import AirwallexRisk
 
-Risk.set(userID: "USER_ID")
+class AppDelegate {
+
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    Risk.start(
+      accountID: nil, // Optional: Set connected account ID later via Risk.set(accountID:)
+      with: AirwallexRiskConfiguration(isProduction: true)
+    )
+  }
+}
 ```
+
+**Notes**:
+- **Payment Acceptance**: `accountID` is **required** and should be your merchant's Airwallex account ID.
+- **Scaled Platform**: `accountID` is **optional** at startup. Set the connected account's Airwallex account ID later using `Risk.set(accountID:)` when available.
+- The optional `AirwallexRiskConfiguration` may also be used if needed. For test/debug builds you can set `isProduction: false` or `environment: .staging/.demo`. You can also customise the frequency of sending logs by `bufferTimeInterval: 5`.  
+
+#### Update user
+
+The SDK needs to be updated when users sign in or out.
+
+**For Payment Acceptance (PA) scenario:**
+
+After a user signs in, set their user ID:
+
+```swift
+import AirwallexRisk
+
+Risk.set(userID: "USER_ID") // Set on sign in
+Risk.set(userID: nil) // Set to nil on sign out
+```
+
+:warning: **Important**: The user ID should be the signed-in user's Airwallex user ID, not your own system user ID.
+
+**For Scaled Platform Account scenario:**
+
+When a platform user (connected account) signs in or out, set both the account ID and user ID to the connected account's Airwallex account ID:
+
+```swift
+import AirwallexRisk
+
+// On platform user sign in
+let connectedAccountId = "CONNECTED_ACCOUNT_ID" // The user's Airwallex connected account ID
+Risk.set(accountID: connectedAccountId)
+Risk.set(userID: connectedAccountId)
+
+// On platform user sign out
+Risk.set(accountID: nil)
+Risk.set(userID: nil)
+```
+
+:warning: **Important**: For Scaled Platform, both `accountID` and `userID` should be set to the connected account's Airwallex account ID (not the platform's account ID, and not the platform's internal user ID).
   
 #### Events
 
