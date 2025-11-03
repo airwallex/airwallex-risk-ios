@@ -104,22 +104,20 @@ Risk.set(userID: nil) // Set to nil on sign out
 
 **For Connected Accounts scenario:**
 
-**Required:** When a platform user (connected account) signs in or out, you must set both the account ID and user ID to the connected account's Airwallex account ID:
+**Required:** When a platform user (connected account) signs in or out, set only the account ID:
 
 ```swift
 import AirwallexRisk
 
 // On platform user sign in
-let connectedAccountId = "CONNECTED_ACCOUNT_ID" // The user's Airwallex connected account ID
+let connectedAccountId = "CONNECTED_ACCOUNT_ID" // The connected account's Airwallex account ID
 Risk.set(accountID: connectedAccountId)
-Risk.set(userID: connectedAccountId)
 
 // On platform user sign out
 Risk.set(accountID: nil)
-Risk.set(userID: nil)
 ```
 
-:warning: **Important**: For Connected Accounts, both `accountID` and `userID` should be set to the connected account's Airwallex account ID (not the platform's account ID, and not the platform's internal user ID).
+:warning: **Important**: For Connected Accounts, do **NOT** set `userID`. Only set `accountID` to the connected account's Airwallex account ID (not the platform's account ID).
   
 #### Events
 
