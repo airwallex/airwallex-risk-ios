@@ -58,7 +58,10 @@ class AppDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     Risk.start(
       accountID: "YOUR_MERCHANT_ACCOUNT_ID", // Required: The PA merchant's account ID at Airwallex
-      with: AirwallexRiskConfiguration(isProduction: true)
+      with: AirwallexRiskConfiguration(
+        isProduction: true,
+        tenant: .pa
+      )
     )
   }
 }
@@ -74,15 +77,22 @@ class AppDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     Risk.start(
       accountID: nil, // Optional: Set connected account ID later via Risk.set(accountID:)
-      with: AirwallexRiskConfiguration(isProduction: true)
+      with: AirwallexRiskConfiguration(
+        isProduction: true,
+        tenant: .scale
+      )
     )
   }
 }
 ```
 
 **Notes**:
-- **Payment Acceptance**: `accountID` is **required** and should be the PA merchant's account ID at Airwallex.
-- **Connected Accounts**: `accountID` is **optional** at startup. Set the connected account's account ID at Airwallex later using `Risk.set(accountID:)` when available.
+- **Payment Acceptance**:
+  - `accountID` is **required** and should be the PA merchant's account ID at Airwallex
+  - `tenant` must be set to `.pa`
+- **Connected Accounts**:
+  - `accountID` is **optional** at startup (set it later via `Risk.set(accountID:)` once the platform user signs in and the connected account is available)
+  - `tenant` must be set to `.scale`
 - The optional `AirwallexRiskConfiguration` may also be used if needed. For test/debug builds you can set `isProduction: false` or `environment: .staging/.demo`. You can also customise the frequency of sending logs by `bufferTimeInterval: 5`.  
 
 #### Update user
