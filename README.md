@@ -159,6 +159,39 @@ Risk.log(
 )
 ```
 
+##### Standardized Event Names
+
+To ensure consistency across integrations, use these standardized event names for common scenarios:
+
+| **Section** | **Event Name** | **Description** | **When to Use** |
+|-------------|----------------|-----------------|-----------------|
+| **Transaction Events** |
+| | `transaction_initiated` | User starts a new transaction flow | When user begins any payment/transfer process, before entering details |
+| **Card Security Events** |
+| | `card_pin_viewed` | User accessed/viewed card PIN | When user successfully views their card PIN through app |
+| | `card_cvc_viewed` | User accessed/viewed card CVC/CVV | When user successfully views their card CVC/security code |
+| **Profile Update Events** |
+| | `profile_phone_updated` | User changed their phone number | When phone number change is successfully saved |
+| | `profile_email_updated` | User changed their email address | When email change is successfully saved |
+
+**Naming Convention:**
+- Format: `category_action` (lowercase, underscore-separated)
+- Tense: Past tense for completed actions (`viewed`, `updated`, `initiated`)
+
+**Example Implementation:**
+```swift
+// Transaction events
+Risk.log(event: "transaction_initiated", screen: "payment_form")
+
+// Card security events
+Risk.log(event: "card_pin_viewed", screen: "card_details")
+Risk.log(event: "card_cvc_viewed", screen: "card_details")
+
+// Profile events
+Risk.log(event: "profile_phone_updated", screen: "profile_settings")
+Risk.log(event: "profile_email_updated", screen: "profile_settings")
+```
+
 #### Request header
 
 When your app sends a request to Airwallex, you must add the provided header into your request before sending. An example implementation follows:
