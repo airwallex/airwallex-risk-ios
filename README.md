@@ -180,16 +180,7 @@ To ensure consistency across integrations, use these standardized event names fo
 
 **Example Implementation:**
 ```swift
-// Transaction events
-Risk.log(event: "transaction_initiated", screen: "payment_form")
-
-// Card security events
-Risk.log(event: "card_pin_viewed", screen: "card_details")
-Risk.log(event: "card_cvc_viewed", screen: "card_details")
-
-// Profile events
-Risk.log(event: "profile_phone_updated", screen: "profile_settings")
-Risk.log(event: "profile_email_updated", screen: "profile_settings")
+Risk.log(event: "transaction_initiated", screen: "YOUR_APP_SCREEN_NAME")
 ```
 
 #### Request header
