@@ -52,6 +52,13 @@ public class Risk: NSObject {
     ///   - userID: Signed in Airwallex user ID. Set `nil` on sign out.
     func set(userID: String?) {
         context.update(userID: userID)
+        let event: EventType.SDKEvent = userID == nil ? .userLogout : .userLogin
+        eventManager.queue(
+            event: .init(
+                type: .automatic(event: event),
+                context: context
+            )
+        )
     }
 
     /// Adds a new event to the queue.
@@ -67,6 +74,25 @@ public class Risk: NSObject {
         eventManager.queue(
             event: .init(
                 type: .custom(event: event),
+                path: screen,
+                context: context
+            )
+        )
+    }
+    
+    /// Adds a new event to the queue.
+    ///
+    /// This is a public method for client apps to log specific lifecycle events, eg. login, logout.
+    /// - Parameters:
+    ///   - event: App event that triggered this method call.
+    ///   - screen: Current app view. Optional.
+    func log(
+        event: Events,
+        screen: String? = nil
+    ) {
+        eventManager.queue(
+            event: .init(
+                type: .custom(event: event.rawValue),
                 path: screen,
                 context: context
             )

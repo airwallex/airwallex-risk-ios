@@ -13,6 +13,8 @@ enum EventType: Equatable {
     enum SDKEvent: String, Codable {
         case installation
         case open
+        case userLogin = "user_login"
+        case userLogout = "user_logout"
     }
 
     case automatic(event: SDKEvent)
