@@ -27,6 +27,7 @@ class ContentViewModel: ObservableObject {
 
     func logout() {
         viewState = .initial
+        authService.logout()
     }
 
     func submitPayment() {

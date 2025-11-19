@@ -144,20 +144,44 @@ Risk.set(accountID: nil)
   
 #### Events
 
-Some app events must be logged to the SDK. These events include:
-- _User logs in:_ When a user logs in, send the event "login". Make sure you **set the user ID** (above) before sending this event.
-- _Create a payout transaction:_ When a user submits a payment transaction, send the event "payout".
-
-Use the following snippet to send event name and current screen name.
+Use the following snippet to send events.
 
 ```swift
 import AirwallexRisk
 
+// Send predefined event
 Risk.log(
-  event: "EVENT_NAME",
-  screen: "SCREEN_NAME"
+  event: .transactionInitiated, // Risk.Events
+  screen: "screen_name" // String?
 )
+
+// Send custom event
+Risk.log(
+  event: "event_name", // String
+  screen: "screen_name" // String?
+)
+
+// Available predefined events:
+// - .transactionInitiated - User starts a new transaction flow
+// - .cardPinViewed - User accessed/viewed card PIN
+// - .cardCvcViewed - User accessed/viewed card CVC/CVV
+// - .profilePhoneUpdated - User changed their phone number
+// - .profileEmailUpdated - User changed their email address
 ```
+
+**Objective-C usage:**
+```objc
+@import AirwallexRisk;
+
+// Send predefined event
+[AWXRisk logPredefinedEvent:AWXRiskEvents.transactionInitiated screen:@"screen_name"];
+
+// Send custom event
+[AWXRisk logWithEvent:@"event_name" screen:@"screen_name"];
+```
+
+> [!NOTE]
+> User login and logout events will be automatically logged when you call Risk.set(userID:) starting from version 1.2.0.
 
 #### Request header
 

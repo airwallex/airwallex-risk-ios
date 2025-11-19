@@ -107,3 +107,58 @@ extension Risk {
         return shared.sessionID
     }
 }
+
+public extension Risk {
+    
+    /// Standardized event names used across integrations.
+    @objc(AWXRiskEvents)
+    class Events: NSObject {
+        public let rawValue: String
+        
+        private init(rawValue: String) {
+            self.rawValue = rawValue
+            super.init()
+        }
+        
+        /// User starts a new transaction flow
+        /// Use when user begins any payment/transfer process, before entering details
+        @objc public static let transactionInitiated = Events(rawValue: "transaction_initiated")
+        
+        /// User accessed/viewed card PIN
+        /// Use when user successfully views their card PIN through app
+        @objc public static let cardPinViewed = Events(rawValue: "card_pin_viewed")
+
+        /// User accessed/viewed card CVC/CVV
+        /// Use when user successfully views their card CVC/security code
+        @objc public static let cardCvcViewed = Events(rawValue: "card_cvc_viewed")
+
+        /// User changed their phone number
+        /// Use when phone number change is successfully saved
+        @objc public static let profilePhoneUpdated = Events(rawValue: "profile_phone_updated")
+
+        /// User changed their email address
+        /// Use when email change is successfully saved
+        @objc public static let profileEmailUpdated = Events(rawValue: "profile_email_updated")
+    }
+    
+    /// Adds a new event to the queue.
+    ///
+    /// This is a public method for client apps to log specific lifecycle events, eg. login, logout.
+    /// - Parameters:
+    ///   - event: App event that triggered this method call.
+    ///   - screen: Current app view. Optional.
+    @objc(logPredefinedEvent:screen:)
+    static func log(
+        event: Events,
+        screen: String? = nil
+    ) {
+        guard let shared else {
+            print(AirwallexValue.notStartedWarning)
+            return
+        }
+        shared.log(
+            event: event.rawValue,
+            screen: screen
+        )
+    }
+}

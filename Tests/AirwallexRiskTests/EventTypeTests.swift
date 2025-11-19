@@ -14,6 +14,9 @@ final class EventTypeTests: XCTestCase {
         XCTAssertEqual(EventType.automatic(event: .installation), EventType(stringValue: "installation"))
         XCTAssertEqual(EventType.automatic(event: .open), EventType(stringValue: "open"))
         XCTAssertEqual(EventType.custom(event: "login"), EventType(stringValue: "login"))
+        // New SDK events
+        XCTAssertEqual(EventType.automatic(event: .userLogin), EventType(stringValue: "user_login"))
+        XCTAssertEqual(EventType.automatic(event: .userLogout), EventType(stringValue: "user_logout"))
     }
 
     func testCodableAutomaticEventType() throws {
@@ -30,6 +33,24 @@ final class EventTypeTests: XCTestCase {
         XCTAssertEqual(try data.jsonString, "{\"type\":\"login\"}")
         let decodedEvent = try JSONDecoder().decode(MockEvent.self, from: data)
         XCTAssertEqual(event.type, decodedEvent.type)
+    }
+
+    func testCodableUserLoginLogout() throws {
+        let loginEvent = MockEvent(type: .automatic(event: .userLogin))
+        let logoutEvent = MockEvent(type: .automatic(event: .userLogout))
+
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
+
+        let loginData = try encoder.encode(loginEvent)
+        XCTAssertEqual(try loginData.jsonString, "{\"type\":\"user_login\"}")
+        let decodedLogin = try decoder.decode(MockEvent.self, from: loginData)
+        XCTAssertEqual(decodedLogin.type, loginEvent.type)
+
+        let logoutData = try encoder.encode(logoutEvent)
+        XCTAssertEqual(try logoutData.jsonString, "{\"type\":\"user_logout\"}")
+        let decodedLogout = try decoder.decode(MockEvent.self, from: logoutData)
+        XCTAssertEqual(decodedLogout.type, logoutEvent.type)
     }
 }
 
