@@ -16,22 +16,54 @@ struct PaymentView: View {
         VStack(spacing: 8) {
             Spacer()
 
-            Text("Send payment")
+            // Predefined Events
+            Text("Predefined Events")
+                .bold()
+            
+            Button("Transaction Initiated", action: model.logTransactionInitiated)
+                .buttonStyle(.bordered)
+            
+            Button("Card PIN Viewed") {
+                model.logCardPinViewed()
+            }
+            .buttonStyle(.bordered)
+
+            Button("Card CVC Viewed") {
+                model.logCardCvcViewed()
+            }
+            .buttonStyle(.bordered)
+
+            Button("Profile Phone Updated") {
+                model.logProfilePhoneUpdated()
+            }
+            .buttonStyle(.bordered)
+
+            Button("Profile Email Updated") {
+                model.logProfileEmailUpdated()
+            }
+            .buttonStyle(.bordered)
+            .padding(.bottom, 20)
+
+            // Predefined Events
+            Text("Custom Event")
                 .bold()
 
-            Text("Tap **send** to submit your payment.")
-
-            Button("Send") {
+            Button("Trigger Custom Event") {
                 model.submitPayment()
             }
-            .padding()
-
+            .buttonStyle(.bordered)
             Spacer()
 
             Button("Log out") {
                 model.logout()
             }
+            .buttonStyle(.borderedProminent)
             .padding()
         }
     }
+}
+
+
+#Preview {
+    PaymentView(model: ContentViewModel())
 }

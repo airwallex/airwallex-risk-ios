@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AirwallexRisk
 
 class ContentViewModel: ObservableObject {
     enum ViewState {
@@ -32,5 +33,26 @@ class ContentViewModel: ObservableObject {
 
     func submitPayment() {
         paymentManager.submitPaymentRequest()
+    }
+
+    // Predefined event methods
+    func logTransactionInitiated() {
+        Risk.log(event: .transactionInitiated)
+    }
+
+    func logCardPinViewed() {
+        Risk.log(event: .cardPinViewed)
+    }
+
+    func logCardCvcViewed() {
+        Risk.log(event: .cardCvcViewed)
+    }
+
+    func logProfilePhoneUpdated() {
+        Risk.log(event: .profilePhoneUpdated)
+    }
+
+    func logProfileEmailUpdated() {
+        Risk.log(event: .profileEmailUpdated)
     }
 }
