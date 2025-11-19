@@ -24,28 +24,4 @@ final class RiskEventsRawRepresentableTests: XCTestCase {
         XCTAssertEqual(Risk.Events(rawValue: "profile_phone_updated"), .profilePhoneUpdated)
         XCTAssertEqual(Risk.Events(rawValue: "profile_email_updated"), .profileEmailUpdated)
     }
-
-    func testOtherCaseRawValueAndInit() {
-        let custom = "some_custom_event"
-        let event = Risk.Events.other(custom)
-        XCTAssertEqual(event.rawValue, custom)
-
-        let initialized = Risk.Events(rawValue: custom)
-        switch initialized {
-        case .other(let name):
-            XCTAssertEqual(name, custom)
-        default:
-            XCTFail("Expected .other case for custom raw value")
-        }
-    }
-
-    func testInitWithUnknownStringProducesOther() {
-        let unknown = "completely_unknown_event"
-        let initialized = Risk.Events(rawValue: unknown)
-        if case .other(let name) = initialized {
-            XCTAssertEqual(name, unknown)
-        } else {
-            XCTFail("Expected .other for unknown raw value")
-        }
-    }
 }

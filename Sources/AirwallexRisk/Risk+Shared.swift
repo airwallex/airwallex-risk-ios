@@ -111,67 +111,27 @@ extension Risk {
 public extension Risk {
     
     /// Standardized event names used across integrations.
-    enum Events: RawRepresentable, Equatable {
+    enum Events: String {
 
         /// User starts a new transaction flow
         /// Use when user begins any payment/transfer process, before entering details
-        case transactionInitiated
+        case transactionInitiated = "transaction_initiated"
         
         /// User accessed/viewed card PIN
         /// Use when user successfully views their card PIN through app
-        case cardPinViewed
+        case cardPinViewed = "card_pin_viewed"
 
         /// User accessed/viewed card CVC/CVV
         /// Use when user successfully views their card CVC/security code
-        case cardCvcViewed
+        case cardCvcViewed = "card_cvc_viewed"
 
         /// User changed their phone number
         /// Use when phone number change is successfully saved
-        case profilePhoneUpdated
+        case profilePhoneUpdated = "profile_phone_updated"
 
         /// User changed their email address
         /// Use when email change is successfully saved
-        case profileEmailUpdated
-
-        /// A catch-all for any non-standard or integration-specific event names.
-        /// Naming convention of the associated will be snake_case and past tense for completed actions (`viewed`, `updated`, `initiated`)
-        case other(String)
-
-        // MARK: RawRepresentable
-        
-        public var rawValue: String {
-            switch self {
-            case .transactionInitiated:
-                return "transaction_initiated"
-            case .cardPinViewed:
-                return "card_pin_viewed"
-            case .cardCvcViewed:
-                return "card_cvc_viewed"
-            case .profilePhoneUpdated:
-                return "profile_phone_updated"
-            case .profileEmailUpdated:
-                return "profile_email_updated"
-            case .other(let name):
-                return name
-            }
-        }
-        
-        public init?(rawValue: String) {
-            switch rawValue {
-            case Self.transactionInitiated.rawValue:
-                self = .transactionInitiated
-            case Self.cardPinViewed.rawValue:
-                self = .cardPinViewed
-            case Self.cardCvcViewed.rawValue:
-                self = .cardCvcViewed
-            case Self.profilePhoneUpdated.rawValue:
-                self = .profilePhoneUpdated
-            case Self.profileEmailUpdated.rawValue:
-                self = .profileEmailUpdated
-            default:
-                self = .other(rawValue)
-            }
-        }
+        case profileEmailUpdated = "profile_email_updated"
     }
     
     /// Adds a new event to the queue.

@@ -68,8 +68,7 @@ final class AirwallexRiskTests: XCTestCase {
             .cardCvcViewed,
             .cardPinViewed,
             .profileEmailUpdated,
-            .profilePhoneUpdated,
-            .other("other")
+            .profilePhoneUpdated
         ]
         
         for (index, event) in events.enumerated() {

@@ -87,7 +87,7 @@ Risk.log(
 // send custom event
 
 Risk.log(
-  event: .other("event_name"),// Risk.Events
+  event: "event_name",// String
   screen: "screen_name"// String?
 )
 ```
