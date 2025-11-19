@@ -17,11 +17,9 @@ final class RiskEventsRawRepresentableTests: XCTestCase {
         XCTAssertEqual(Risk.Events.profileEmailUpdated.rawValue, "profile_email_updated")
     }
 
-    func testInitFromRawValueForPredefinedEvents() {
-        XCTAssertEqual(Risk.Events(rawValue: "transaction_initiated"), .transactionInitiated)
-        XCTAssertEqual(Risk.Events(rawValue: "card_pin_viewed"), .cardPinViewed)
-        XCTAssertEqual(Risk.Events(rawValue: "card_cvc_viewed"), .cardCvcViewed)
-        XCTAssertEqual(Risk.Events(rawValue: "profile_phone_updated"), .profilePhoneUpdated)
-        XCTAssertEqual(Risk.Events(rawValue: "profile_email_updated"), .profileEmailUpdated)
+    func testPredefinedEventsAreUnique() {
+        XCTAssertTrue(Risk.Events.transactionInitiated === Risk.Events.transactionInitiated)
+        XCTAssertFalse(Risk.Events.transactionInitiated === Risk.Events.cardPinViewed)
+        XCTAssertFalse(Risk.Events.cardCvcViewed === Risk.Events.profilePhoneUpdated)
     }
 }

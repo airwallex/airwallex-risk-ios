@@ -78,19 +78,37 @@ Use the following snippet to send events.
 ```swift
 import AirwallexRisk
 
-// send predefined event
+// Send predefined event
 Risk.log(
-  event: .transactionInitiated,// Risk.Events
-  screen: "screen_name"// String?
+  event: .transactionInitiated, // Risk.Events
+  screen: "screen_name" // String?
 )
 
-// send custom event
-
+// Send custom event
 Risk.log(
-  event: "event_name",// String
-  screen: "screen_name"// String?
+  event: "event_name", // String
+  screen: "screen_name" // String?
 )
+
+// Available predefined events:
+// - .transactionInitiated - User starts a new transaction flow
+// - .cardPinViewed - User accessed/viewed card PIN
+// - .cardCvcViewed - User accessed/viewed card CVC/CVV
+// - .profilePhoneUpdated - User changed their phone number
+// - .profileEmailUpdated - User changed their email address
 ```
+
+**Objective-C usage:**
+```objc
+@import AirwallexRisk;
+
+// Send predefined event
+[AWXRisk logPredefinedEvent:AWXRiskEvents.transactionInitiated screen:@"screen_name"];
+
+// Send custom event
+[AWXRisk logWithEvent:@"event_name" screen:@"screen_name"];
+```
+
 > [!NOTE]
 > User login and logout events will be automatically logged when you call Risk.set(userID:) starting from version 1.2.0.
 

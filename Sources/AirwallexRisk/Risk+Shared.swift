@@ -111,27 +111,34 @@ extension Risk {
 public extension Risk {
     
     /// Standardized event names used across integrations.
-    enum Events: String {
-
+    @objc(AWXRiskEvents)
+    class Events: NSObject {
+        public let rawValue: String
+        
+        private init(rawValue: String) {
+            self.rawValue = rawValue
+            super.init()
+        }
+        
         /// User starts a new transaction flow
         /// Use when user begins any payment/transfer process, before entering details
-        case transactionInitiated = "transaction_initiated"
+        @objc public static let transactionInitiated = Events(rawValue: "transaction_initiated")
         
         /// User accessed/viewed card PIN
         /// Use when user successfully views their card PIN through app
-        case cardPinViewed = "card_pin_viewed"
+        @objc public static let cardPinViewed = Events(rawValue: "card_pin_viewed")
 
         /// User accessed/viewed card CVC/CVV
         /// Use when user successfully views their card CVC/security code
-        case cardCvcViewed = "card_cvc_viewed"
+        @objc public static let cardCvcViewed = Events(rawValue: "card_cvc_viewed")
 
         /// User changed their phone number
         /// Use when phone number change is successfully saved
-        case profilePhoneUpdated = "profile_phone_updated"
+        @objc public static let profilePhoneUpdated = Events(rawValue: "profile_phone_updated")
 
         /// User changed their email address
         /// Use when email change is successfully saved
-        case profileEmailUpdated = "profile_email_updated"
+        @objc public static let profileEmailUpdated = Events(rawValue: "profile_email_updated")
     }
     
     /// Adds a new event to the queue.
@@ -140,6 +147,7 @@ public extension Risk {
     /// - Parameters:
     ///   - event: App event that triggered this method call.
     ///   - screen: Current app view. Optional.
+    @objc(logPredefinedEvent:screen:)
     static func log(
         event: Events,
         screen: String? = nil
@@ -149,7 +157,7 @@ public extension Risk {
             return
         }
         shared.log(
-            event: event,
+            event: event.rawValue,
             screen: screen
         )
     }
