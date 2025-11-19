@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-xcframework:
-    runs-on: macos-latest
+    runs-on: macos-15
 
     steps:
     - name: Checkout repository
@@ -13,7 +13,7 @@ jobs:
       
     - uses: maxim-lobanov/setup-xcode@60606e260d2fc5762a71e64e74b2174e8ea3c8bd #1.6.0
       with:
-        xcode-version: latest-stable
+        xcode-version: '16.4'
 
     - name: Install swift-create-xcframework tool
       run: |
