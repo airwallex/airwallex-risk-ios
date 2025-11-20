@@ -2,6 +2,12 @@ name: Build XCFramework
 
 on:
   workflow_dispatch:
+    inputs:
+      include_debug_symbols:
+        description: 'Include debug symbols in XCFramework'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build-xcframework:
@@ -22,7 +28,12 @@ jobs:
         make install
 
     - name: Create XCFramework
-      run: swift create-xcframework --platform ios --xc-setting OTHER_SWIFT_FLAGS='-DCREATE_XCFRAMEWORK -Xfrontend -empty-abi-descriptor'
+      run: |
+        if [ "${{ inputs.include_debug_symbols }}" == "true" ]; then
+          swift create-xcframework --platform ios --xc-setting OTHER_SWIFT_FLAGS='-DCREATE_XCFRAMEWORK -Xfrontend -empty-abi-descriptor'
+        else
+          swift create-xcframework --platform ios --no-debug-symbols --xc-setting OTHER_SWIFT_FLAGS='-DCREATE_XCFRAMEWORK -Xfrontend -empty-abi-descriptor'
+        fi
 
     - name: Copy resources
       run: |
