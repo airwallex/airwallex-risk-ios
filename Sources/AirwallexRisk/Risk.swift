@@ -38,11 +38,36 @@ public class Risk: NSObject {
 
     /// Sets the Airwallex  account ID.
     ///
-    /// Use this method to update the account ID if it changes. 
+    /// Use this method to update the account ID if it changes.
     /// - Parameters:
     ///   - accountID: Airwallex account ID. Set `nil` on sign out.
     func set(accountID: String?) {
+        guard context.tenant == .scale else {
+            context.update(accountID: accountID)
+            return
+        }
+        let existingAccountID = context.account.wrappedValue.id
+        // If same value, do nothing
+        guard accountID != existingAccountID else { return }
+        // Send logout event before context update if there's an existing account
+        if existingAccountID != nil {
+            eventManager.queue(
+                event: .init(
+                    type: .automatic(event: .accountLogout),
+                    context: context
+                )
+            )
+        }
         context.update(accountID: accountID)
+        // Send login event after update if there's a new account
+        if accountID != nil {
+            eventManager.queue(
+                event: .init(
+                    type: .automatic(event: .accountLogin),
+                    context: context
+                )
+            )
+        }
     }
 
     /// Sets the signed in Airwallex  user ID.
@@ -51,14 +76,28 @@ public class Risk: NSObject {
     /// - Parameters:
     ///   - userID: Signed in Airwallex user ID. Set `nil` on sign out.
     func set(userID: String?) {
-        context.update(userID: userID)
-        let event: EventType.SDKEvent = userID == nil ? .userLogout : .userLogin
-        eventManager.queue(
-            event: .init(
-                type: .automatic(event: event),
-                context: context
+        let existingUserID = context.user.wrappedValue.id
+        // If same value, do nothing
+        guard userID != existingUserID else { return }
+        // Send logout event before context update if there's an existing user
+        if existingUserID != nil {
+            eventManager.queue(
+                event: .init(
+                    type: .automatic(event: .userLogout),
+                    context: context
+                )
             )
-        )
+        }
+        context.update(userID: userID)
+        // Send login event after update if there's a new user
+        if userID != nil {
+            eventManager.queue(
+                event: .init(
+                    type: .automatic(event: .userLogin),
+                    context: context
+                )
+            )
+        }
     }
 
     /// Adds a new event to the queue.

@@ -15,6 +15,8 @@ enum EventType: Equatable {
         case open
         case userLogin = "user_login"
         case userLogout = "user_logout"
+        case accountLogin = "account_login"
+        case accountLogout = "account_logout"
     }
 
     case automatic(event: SDKEvent)
