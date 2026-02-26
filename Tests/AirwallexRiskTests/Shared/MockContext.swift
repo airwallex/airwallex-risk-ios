@@ -11,12 +11,13 @@ import Foundation
 
 extension AirwallexRiskContext {
     static func test(
-        accountID: String = "accountID"
+        accountID: String? = "accountID",
+        tenant: Tenant = .internal
     ) -> AirwallexRiskContext {
         .init(
             accountID: accountID,
             environment: .staging,
-            tenant: .internal
+            tenant: tenant
         )
     }
 }

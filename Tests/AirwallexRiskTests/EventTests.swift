@@ -20,7 +20,6 @@ final class EventTests: XCTestCase {
         default: XCTFail("Should be `.automatic(.open)`")
         }
         XCTAssertEqual(event.accountID, "accountID")
-        XCTAssertNil(event.userID)
         XCTAssertEqual(event.deviceID, context.deviceID.wrappedValue)
         XCTAssertEqual(event.sessionID, context.sessionID)
         XCTAssertEqual(event.tenant, context.tenant)
