@@ -12,7 +12,7 @@ import XCTest
 final class AirwallexRiskEnvironmentTests: XCTestCase {
     func testHosts() {
         XCTAssertEqual(AirwallexRiskEnvironment.production.host, "bws.airwallex.com")
-        XCTAssertEqual(AirwallexRiskEnvironment.demo.host, "bws.sandbox.airwallex.com")
+        XCTAssertEqual(AirwallexRiskEnvironment.demo.host, "bws-demo.airwallex.com")
         XCTAssertEqual(AirwallexRiskEnvironment.staging.host, "bws-staging.airwallex.com")
     }
 }
