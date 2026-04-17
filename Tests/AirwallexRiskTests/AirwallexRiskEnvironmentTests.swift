@@ -14,5 +14,6 @@ final class AirwallexRiskEnvironmentTests: XCTestCase {
         XCTAssertEqual(AirwallexRiskEnvironment.production.host, "bws.airwallex.com")
         XCTAssertEqual(AirwallexRiskEnvironment.demo.host, "bws-demo.airwallex.com")
         XCTAssertEqual(AirwallexRiskEnvironment.staging.host, "bws-staging.airwallex.com")
+        XCTAssertEqual(AirwallexRiskEnvironment.preview.host, "bws.sandbox.airwallex.com")
     }
 }

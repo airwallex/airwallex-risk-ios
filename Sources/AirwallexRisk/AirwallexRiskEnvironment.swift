@@ -12,6 +12,7 @@ import Foundation
     case production
     case demo
     case staging
+    case preview
 
     var host: String {
         switch self {
@@ -21,6 +22,8 @@ import Foundation
             return AirwallexHost.demo
         case .staging:
             return AirwallexHost.staging
+        case .preview:
+            return AirwallexHost.preview
         }
     }
 }
