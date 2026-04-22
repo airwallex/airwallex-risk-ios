@@ -43,6 +43,10 @@ class MockEventScheduler: EventSchedulerType {
     func scheduleRepeating(block: @escaping () async -> Void) {
         isRunning = true
     }
+
+    func cancel() {
+        isRunning = false
+    }
 }
 
 class MockAutomaticEventProvider: AutomaticEventProviderType {
