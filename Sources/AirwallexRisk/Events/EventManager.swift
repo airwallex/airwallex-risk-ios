@@ -73,6 +73,8 @@ class EventManager: EventManagerType {
     }
 
     func scheduleEvents() {
-        eventScheduler.scheduleRepeating(block: sendEvents)
+        eventScheduler.scheduleRepeating { [weak self] in
+            await self?.sendEvents()
+        }
     }
 }

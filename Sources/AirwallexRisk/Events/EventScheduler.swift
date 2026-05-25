@@ -10,26 +10,34 @@ import Foundation
 
 protocol EventSchedulerType {
     func scheduleRepeating(block: @escaping () async -> Void)
+    func cancel()
 }
 
 class EventScheduler: EventSchedulerType {
     private let timeInterval: TimeInterval
-    private var timer: Timer?
+    private var task: Task<Void, Never>?
 
     init(timeInterval: TimeInterval) {
         self.timeInterval = timeInterval
     }
 
     func scheduleRepeating(block: @escaping () async -> Void) {
-        let timer = Timer(timeInterval: timeInterval, repeats: true) { _ in
-            Task { await block() }
+        task?.cancel()
+        task = Task {
+            while !Task.isCancelled {
+                await block()
+                let interval = UInt64(timeInterval * 1_000_000_000)
+                try? await Task.sleep(nanoseconds: interval)
+            }
         }
-        RunLoop.current.add(timer, forMode: .common)
-        self.timer = timer
-        self.fire()
     }
 
-    private func fire() {
-        timer?.fire()
+    func cancel() {
+        task?.cancel()
+        task = nil
+    }
+
+    deinit {
+        task?.cancel()
     }
 }
